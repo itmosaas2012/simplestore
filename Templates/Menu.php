@@ -8,61 +8,11 @@
 ?>
     <nav class="header_menu">
         <ul>
-            <li class="menuSeparator"></li>
             <li class="header_menu_item">
-                <a href="#">Item 1</a>
-                <!-- InstanceBeginEditable name="header_subMenu" -->
-                <nav class="header_subMenu">
-                    <ul>
-                        <li class="menuSeparator"></li>
-                        <li class="heder_subMenu_item"><a href="#">Item 1.1</a></li>
-                        <li class="menuSeparator"></li>
-                        <li class="heder_subMenu_item"><a href="#">Item 1.2</a></li>
-                        <li class="menuSeparator"></li>
-                        <li class="heder_subMenu_item"><a href="#">Item 1.3</a></li>
-                        <li class="menuSeparator"></li>
-                    </ul>
-                <!-- end .header_subMenu --></nav>
-                <!-- InstanceEndEditable -->
-            </li>
-            <li class="menuSeparator">::</li>
-            <li class="header_menu_item"><a href="#">Item 2</a>
-                <!-- InstanceBeginEditable name="header_subMenu" -->
-                <nav class="header_subMenu">
-                    <ul>
-                        <li class="menuSeparator"></li>
-                        <li class="heder_subMenu_item"><a href="#">Item 2.1</a></li>
-                        <li class="menuSeparator"></li>
-                        <li class="heder_subMenu_item"><a href="#">Item 2.2</a></li>
-                        <li class="menuSeparator"></li>
-                        <li class="heder_subMenu_item"><a href="#">Item 2.3</a></li>
-                        <li class="menuSeparator"></li>
-                    </ul>
-                <!-- end .header_subMenu --></nav>
-                <!-- InstanceEndEditable -->
-            </li>
-            <li class="menuSeparator">::</li>
-            <li class="header_menu_item"><a href="#">Item 3</a>
-                <!-- InstanceBeginEditable name="header_subMenu" -->
-                <nav class="header_subMenu">
-                    <ul>
-                        <li class="menuSeparator"></li>
-                        <li class="heder_subMenu_item"><a href="#">Item 3.1</a></li>
-                        <li class="menuSeparator"></li>
-                        <li class="heder_subMenu_item"><a href="#">Item 3.2</a></li>
-                        <li class="menuSeparator"></li>
-                        <li class="heder_subMenu_item"><a href="#">Item 3.3</a></li>
-                        <li class="menuSeparator"></li>
-                    </ul>
-                <!-- end .header_subMenu --></nav>
-                <!-- InstanceEndEditable -->
-            </li>
-            <li class="menuSeparator">::</li>
-            
             <?php if($_SESSION['connected']){ ?>
                 <li class="header_menu_item">
                 <a href='/Settings'>Настройки</a></li>
-				<li class="menuSeparator">::</li>
+				<li class="menuSeparator"></li>
             <?php } ?>  
 
             <!--Administration-->
@@ -74,15 +24,13 @@
                     <li class="menuSeparator"></li>
                     <li class="heder_subMenu_item"><a href="/Administration/Staff">Управления соотрудников</a></li>
                     <li class="menuSeparator"></li>
-                    <li class="heder_subMenu_item"><a href="/Administration/WareHouses">Управления складов</a></li>
-                    <li class="menuSeparator"></li>
-                    <li class="heder_subMenu_item"><a href="/Administration/Stores">Управления магазинов</a></li>
+                    <li class="heder_subMenu_item"><a href="/Administration/WorkPlaces">Управления пунктами</a></li>
                     <li class="menuSeparator"></li>
                 </ul>
-                <!-- end .header_subMenu --></nav></li>
-            <li class="menuSeparator">::</li>
+                </nav></li>
+                <li class="menuSeparator"></li>
             <?php } ?>
         </ul>
-		<!-- end .header_actions --></nav>
+    </nav>
 
 
