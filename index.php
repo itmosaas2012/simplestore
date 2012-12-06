@@ -42,6 +42,7 @@ if($_SERVER['REQUEST_URI'] === '/' || $_SERVER['REQUEST_URI'] === '') ;
 elseif($_SERVER['REQUEST_URI'] === '/Registration') require_once 'Modules/Registration/Registration.php';
 elseif($_SERVER['REQUEST_URI'] === '/Logout') require_once 'Modules/Disconection/Disconection.php';
 elseif($_SERVER['REQUEST_URI'] === '/Settings') require_once 'Modules/Personal/AccountSettings.php';
+elseif($_SERVER['REQUEST_URI'] === '/Purchase') require_once 'Modules/Purchase/Purchase.php';
 elseif(substr_compare($_SERVER['REQUEST_URI'], '/Administration', 0, 15, true)===0) require_once 'Modules/Administration/Administration.php';
 
 require_once 'Modules/Connection/Connection.php';//Have to be included in all cases.
