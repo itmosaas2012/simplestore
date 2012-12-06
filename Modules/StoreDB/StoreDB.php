@@ -378,10 +378,8 @@ class StoreDB {
         return $sth->execute();
     }
 
-    public function user_change_rank($userID, $rankID) {
-
-        $this->user_remove_all_rank($userID);
-
+	public function user_rank_add($userID, $rankID) {
+		
         $sth = $this->prepare('insert into %userRank% set
                                 userID = :userID,
                                 rankID = :rankID');
@@ -390,7 +388,7 @@ class StoreDB {
         $sth->bindValue(':rankID', $rankID, PDO::PARAM_INT);
 
         return $sth->execute();
-    }
+	}
 
     private function user_remove_all_rank($userID) {
 
@@ -402,12 +400,17 @@ class StoreDB {
         return $sth->execute();
     }
 
-    public function user_rank($userID) {
+    public function user_ranks($userID) {
 
         $sth = $this->prepare('select rankID from %userRank% where userID = :userID');
         $sth->bindValue(':userID', $userID, PDO::PARAM_INT);
 
-        return $sth->fetchColumn(0);
+		$ranks = array();
+		while ($rank = $sth->fetchColumn(0)) {
+			$ranks[] = $rank;
+		}
+
+        return $rank;
     }
 
     // Workplace actions
