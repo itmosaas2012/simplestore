@@ -17,6 +17,8 @@ class Purchase {
 
     private $user_id;
 
+    private $workplace_id;
+
     public function init() {
         if (!$this->check_permissions()) {
             $this->error_page('Чтобы иметь доступ к этой странице вы должны иметь роль закупщика склада!');
@@ -31,12 +33,13 @@ class Purchase {
         }
 
         if (isset($_SESSION['login']) && $_SESSION['login']) {
-            $sth = $this->db->prepare('select userID from %user% where login = :login');
+            $sth = $this->db->prepare('select * from %user% where login = :login');
             $sth->bindValue(':login', $_SESSION['login'], PDO::PARAM_INT);
             $sth->execute();
-            $user_id = $sth->fetchColumn(0);
-            if ($user_id) {
-                $this->user_id = intval($user_id);
+            $user = $sth->fetchObject();
+            if ($user) {
+                $this->user_id = intval($user->userID);
+                $this->workplace_id = intval($user->workplaceID);
             } else {
                 $this->error_page('Произошла ошибка...');
                 return;
@@ -85,14 +88,19 @@ class Purchase {
 
     public function all_items() {
         $items = array();
-        $sth = $this->db->prepare('select i.*, o.count, so.count as sold_count from %item% i
-                                    left join %object% o on i.itemID = o.itemID
-                                    left join %soldItem% so on o.itemID = so.itemID');
+        $sth = $this->db->prepare('select i.*,
+        (select sum(count) from %object% o where o.workplaceID in (select workplaceID from %workplace% wp where wp.wpTypeID = 1) and o.itemID = i.itemID) as ware_count,
+        (select sum(count) from %soldItem% si where si.itemID = i.itemID) as sold_count,
+        (select count from %object% o where o.itemID = i.itemID and o.workplaceID = :workplaceID) as left_count
+        from %item% i');
+
+        $sth->bindValue(':workplaceID', $this->workplace_id, PDO::PARAM_INT);
+
         $sth->execute();
         while ($db_item = $sth->fetchObject()) {
-            $db_item->count = intval($db_item->count);
+            $db_item->ware_count = intval($db_item->ware_count);
             $db_item->sold_count = intval($db_item->sold_count);
-            $db_item->left_count = $db_item->count - $db_item->sold_count;
+            $db_item->left_count = intval($db_item->left_count);
             $items[] = $db_item;
         }
         return $items;

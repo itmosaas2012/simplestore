@@ -17,7 +17,7 @@
         <?php foreach($view['items'] as $item): ?>
         <tr>
             <td><?=$item->name?></td>
-            <td><?=$item->count?></td>
+            <td><?=$item->ware_count?></td>
             <td><?=$item->sold_count?></td>
             <td><?=$item->left_count?></td>
             <td><input type="text" name="item[<?=$item->itemID?>]" value="0"></td>
