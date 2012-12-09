@@ -43,7 +43,7 @@ class Purchase {
             }
         }
 
-        if ($_POST['form'] == 'request_items') {
+        if (array_key_exists('form', $_POST) && $_POST['form'] == 'request_items') {
             $this->process_request();
         }
 
