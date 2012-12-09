@@ -107,9 +107,7 @@ class Purchase {
     }
 
     private function check_permissions() {
-
-        return true;
-
+        
         if ($_SESSION['rank'] == 'Закупщик магазина') {
             return true;
         }
