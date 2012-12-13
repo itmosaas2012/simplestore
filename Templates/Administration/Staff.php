@@ -12,7 +12,8 @@
     if(isset($view['success']) && $view['success'] != '')
     echo '<div class="message success">'.$view['success'].'</div>';?>
 
-<form method="post" action="/Administration/AddUser">
+<script type="text/javascript">SS.newStaff.init();</script>
+<form method="post" action="/Administration/AddUser" class="new-user-form">
 
     <h2>Ввести новых пользователей:</h2>
 

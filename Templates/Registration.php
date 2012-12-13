@@ -9,7 +9,7 @@
     if(isset($view['error']) && $view['error'] != '')
     echo '<div class="message error">'.$view['error'].'</div>';?>
 
-<form method="post" action="/Registration">
+<form method="post" action="/Registration" class="register-form">
 
 <?php if($view['step'] == 1) {?>
     <h2>Введите данные, относящейся к компании</h2>
@@ -22,6 +22,7 @@
 	</div>
     
 <?php } elseif($view['step'] == 2) {?>
+<script type="text/javascript">SS.registerForm.init();</script>
     <h2>Введите данные, относящейся к администратору:</h2>
     <div class="form-div">
 	    <label class="form-label" for="login">Логин: </label>
