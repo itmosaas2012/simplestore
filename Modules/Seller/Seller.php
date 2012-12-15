@@ -67,19 +67,17 @@ class Seller {
         }
 
         if ($added) {
-            $this->view['message_success'] = 'Заказ добавлен.';
+            $this->view['message_success'] = 'Данные успешно обновлены.';
         } else {
-            $this->view['message_error'] = 'Закажите хотя бы один товар.';
+            $this->view['message_error'] = 'Введите данные для обновления.';
         }
     }
 
     private function db_request_add($item_id, $item_count) {
-        $sth = $this->db->prepare('insert into %request% set
-                                userID = :userID,
+        $sth = $this->db->prepare('insert into %soldItem% set
                                 itemID = :itemID,
                                 count = :count');
 
-        $sth->bindValue(':userID', $this->user_id, PDO::PARAM_INT);
         $sth->bindValue(':itemID', $item_id, PDO::PARAM_INT);
         $sth->bindValue(':count', $item_count, PDO::PARAM_INT);
 
