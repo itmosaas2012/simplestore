@@ -4,10 +4,8 @@
 <script type="text/javascript" src="http://scriptjava.net/source/scriptjava/scriptjava.js"></script>
 <script type="text/javascript">
 
-var update = function(element){
-alert('1');
-var val_next = $$(element).$$next().$$html();
-alert(val_next);
+var update = function(th){
+alert($$(th).$$prev().$$html());
 }
 </script>
 
@@ -28,7 +26,7 @@ alert(val_next);
             <td><?=$item->name?></td>
             <td><?=$item->ware_count?></td>
             <td><?=$item->sold_count?></td>
-			<td><input type="text" name="item[<?=$item->itemID?>]" value="0" onmouseout="javascript: update(this);"></td>
+			<td><input type="text" name="item[<?=$item->itemID?>]" value="0" onmouseout="update(this);"></td>
             <td><?=$item->result?></td>
             
         </tr>
