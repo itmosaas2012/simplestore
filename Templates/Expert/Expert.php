@@ -23,9 +23,6 @@
             
         </tr>
             <?php endforeach; ?>
-        <tr>
-            <td colspan="5" style="text-align: right;"><button class="btn btn-primary btn-small" type="submit">Подсчитать</button></td>
-        </tr>
         </tbody>
     </table>
 </form>
