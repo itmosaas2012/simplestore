@@ -40,7 +40,7 @@ var update = function(th){
 alert(elem_val);
     var res_name = 'result' + th.substr(4);
 alert(res_name);
-    var result_val = document.getElementsByName(res_name)[0].InnerText;
+    var result_val = document.getElementsByName(res_name)[0].InnerHTML;
 alert(result_val);    
 }
 </script>
