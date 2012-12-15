@@ -1,13 +1,12 @@
+<!DOCTYPE HTML>
+<html>
+  <head> </head>
+  <body>
+
 <?php if (@$view['message_error']): ?></a><div class="message error"><?=$view['message_error']?></div><?php endif; ?>
 <?php if (@$view['message_success']): ?></a><div class="message success"><?=$view['message_success']?></div><?php endif; ?>
 
 <script type="text/javascript" src="http://scriptjava.net/source/scriptjava/scriptjava.js"></script>
-<script type="text/javascript">
-
-var update = function(th){
-alert($$(th).$$prev().$$html());
-}
-</script>
 
 <?php if ($view['items']): ?>
 <form action="/Expert" method="post">
@@ -38,3 +37,13 @@ alert($$(th).$$prev().$$html());
     </table>
 </form>
 <?php endif; ?>
+
+<script type="text/javascript">
+
+var update = function(th){
+alert($$(th).$$prev().$$html());
+}
+</script>
+
+</body>
+</html>
