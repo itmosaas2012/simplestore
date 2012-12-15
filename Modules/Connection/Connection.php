@@ -41,6 +41,29 @@ if($_SERVER['REQUEST_URI'] == '/Connection')
 
                 $_SESSION['rank'] = $rank;
 
+				
+                $sql='SELECT rank.name, wpType.description, workplace.address, workplace.workplaceID
+                        FROM rank as rank
+                        INNER JOIN userRank_'.$companyID.' as userRank
+                            ON rank.rankID=userRank.rankID
+                        INNER JOIN user_'.$companyID.' as user
+                            ON userRank.userID=user.userID
+                        LEFT JOIN workplace_'.$companyID.' as workplace
+                            ON userRank.workplaceID=workplace.workplaceID
+                        LEFT JOIN wpType as wpType
+                            ON workplace.wpTypeID=wpType.wpTypeID
+                      WHERE user.login="'.$_SESSION['login'].'"';
+                $_SESSION['post'] = array();
+                foreach ($mysql->query($sql) as $row)
+                {
+                    $_SESSION['post'][] = array('rank' => $row['name'],
+                                                'workplace' => array(
+                                                    'address' => $row['address'],
+                                                    'ID' => $row['workplaceID'],
+                                                    'type' => $row['description']
+                                                ));
+                }
+				
                 $_SESSION['connected'] = true;
                 header('Location: /');//redirection
             }
