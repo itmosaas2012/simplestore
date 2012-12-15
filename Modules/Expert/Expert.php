@@ -99,8 +99,7 @@ class Expert {
         while ($db_item = $sth->fetchObject()) {
             $db_item->ware_count = intval($db_item->ware_count);
             $db_item->sold_count = intval($db_item->sold_count);
-            $db_item->ware_count = intval($db_item->ware_count) + intval($db_item->sold_count);
-            $db_item->result = intval($db_item->ware_count) - intval($db_item->sold_count);
+            $db_item->result = intval($db_item->ware_count) + intval($db_item->sold_count) - intval($db_item->sold_count);
             $items[] = $db_item;
         }
 		
