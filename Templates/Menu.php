@@ -32,7 +32,7 @@
                 <?php } ?>
 
                     <li class="header_menu_item">
-                        Рабочея место
+                        Рабочее место
                         <nav class="header_subMenu">
                             <ul>
                                 <?php if(in_array('Товаровед склада', $ranks) || in_array('Администратор', $ranks)) { ?>
@@ -65,7 +65,7 @@
                 <?php } ?>		
 
                 <!--Товаровед магазина-->
-                <?php if($_SESSION['connected'] && $_SESSION['rank'] == 'Товаровед магазина') { ?>
+                <?php if($_SESSION['connected'] && $_SESSION['rank'] == 'Товароввед магазина') { ?>
                 <li class="header_menu_item"><a href="#">
                     <a href="/Expert">Товаровед магазина</a></li>
                 <li class="menuSeparator"></li>
