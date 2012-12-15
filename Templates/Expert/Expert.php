@@ -21,7 +21,7 @@
             <td><?=$item->ware_count?></td>
             <td><?=$item->sold_count?></td>
             <td><input type="text" name="item[<?=$item->itemID?>]" value="0" onmouseout="update(this.name);"></td>
-            <td name="result[<?=$item->itemID?>]"><?=$item->result?></td>
+            <td class="result[<?=$item->itemID?>]"><?=$item->result?></td>
             
         </tr>
             <?php endforeach; ?>
@@ -40,7 +40,7 @@ var update = function(th){
 alert(elem_val);
     var res_name = 'result' + th.substr(4);
 alert(res_name);
-    var result_val = document.getElementsByName(res_name)[0].InnerHTML;
+    var result_val = document.getElementsByClassName(res_name)[0].InnerText;
 alert(result_val);    
 }
 </script>
