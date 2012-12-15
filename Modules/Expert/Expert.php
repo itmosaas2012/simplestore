@@ -108,7 +108,7 @@ class Expert {
 
     private function check_permissions() {
         
-        if ($_SESSION['rank'] == 'Товаровед магазина') {
+        if ($_SESSION['rank'] == 'Товароввед магазина') {
             return true;
         }
 
