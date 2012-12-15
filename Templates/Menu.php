@@ -62,7 +62,14 @@
                 <li class="header_menu_item"><a href="#">
                     <a href="/Seller">Продавец магазина</a></li>
                 <li class="menuSeparator"></li>
-                <?php } ?>				
+                <?php } ?>		
+
+                <!--Товаровед магазина-->
+                <?php if($_SESSION['connected'] && $_SESSION['rank'] == 'Товаровед магазина') { ?>
+                <li class="header_menu_item"><a href="#">
+                    <a href="/Expert">Товаровед магазина</a></li>
+                <li class="menuSeparator"></li>
+                <?php } ?>					
         </ul>
     </nav>
 
