@@ -3,7 +3,16 @@
 
 <script type="text/javascript">
 var update = function(element){
-    alert(element);
+alert('1');
+    var elem = document.getElementsByName(element)[0];
+    alert('2');
+    var nextelem = elem.next();
+    alert('3');
+    
+    var result = nextelem.value + elem.value;
+    alert('4');
+    nextelem.InnerText = result;
+    alert('5');
 }
 </script>
 
