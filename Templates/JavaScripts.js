@@ -205,3 +205,26 @@ SS.registerForm = function() {
     	}
     };
 }();
+
+SS.whGoodsManager = function() {
+	return {
+		init: function() {
+			$(function() {
+				var updateGoodName = function() {
+					var val = $goodType.filter(':checked').val();
+					if(val=='existent') {
+						$('#newGoodName').parent().hide();
+						$('#existentGoodName').parent().show();					
+					} else {
+						$('#newGoodName').parent().show();
+						$('#existentGoodName').parent().hide();
+					}
+				};
+				var $form = $('form.wh-goods-manager'),
+					$goodType = $form.find('[name="goodType"]');
+				$goodType.change(updateGoodName);
+				updateGoodName();
+			});
+		},
+	};
+}();

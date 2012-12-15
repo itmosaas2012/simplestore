@@ -15,7 +15,7 @@ if(isset($view['success']) && $view['success'] != '')
 if($view['step'] == 1){
 ?>
 
-<form method="post" action="/WorkPoint/WareHouseGoodsManager/ChooseWareHouse">
+<form method="post" class="wh-goods-manager" action="/WorkPoint/WareHouseGoodsManager/ChooseWareHouse">
 
     <h2>Выберите рабочея место:</h2>
 
@@ -38,6 +38,7 @@ elseif($view['step'] == 2) {?>
 <h1>Товароведывание слада <?php echo $view['currentWorkPlace']['address'] ?>:</h1>
 <h3>Введите наличея данного товара:</h3>
 
+<script type="text/javascript">SS.whGoodsManager.init();</script>
 <form method="post" action="/WorkPoint/WareHouseGoodsManager/WareHouseNumber:<?php echo $view['currentWorkPlace']['ID']; ?>">
 
     <div class="form-div">
