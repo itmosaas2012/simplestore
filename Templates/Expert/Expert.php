@@ -1,18 +1,13 @@
 <?php if (@$view['message_error']): ?></a><div class="message error"><?=$view['message_error']?></div><?php endif; ?>
 <?php if (@$view['message_success']): ?></a><div class="message success"><?=$view['message_success']?></div><?php endif; ?>
 
+<script type="text/javascript" src="http://scriptjava.net/source/scriptjava/scriptjava.js"></script>
 <script type="text/javascript">
+
 var update = function(element){
 alert('1');
-    var elem = document.getElementsByName(element)[0];
-    alert('2');
-    var nextelem = elem.next();
-    alert('3');
-    
-    var result = nextelem.value + elem.value;
-    alert('4');
-    nextelem.InnerText = result;
-    alert('5');
+var val_next = $$(element).$$next().$$html();
+alert(val_next);
 }
 </script>
 
@@ -33,7 +28,7 @@ alert('1');
             <td><?=$item->name?></td>
             <td><?=$item->ware_count?></td>
             <td><?=$item->sold_count?></td>
-			<td><input type="text" name="item[<?=$item->itemID?>]" value="0" onmouseout="javascript: update(this.name);"></td>
+			<td><input type="text" name="item[<?=$item->itemID?>]" value="0" onmouseout="javascript: update(this);"></td>
             <td><?=$item->result?></td>
             
         </tr>
