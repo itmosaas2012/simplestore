@@ -1,8 +1,3 @@
-<!DOCTYPE HTML>
-<html>
-  <head> </head>
-  <body>
-
 <?php if (@$view['message_error']): ?></a><div class="message error"><?=$view['message_error']?></div><?php endif; ?>
 <?php if (@$view['message_success']): ?></a><div class="message success"><?=$view['message_success']?></div><?php endif; ?>
 
@@ -44,6 +39,3 @@ var update = function(th){
 alert($$(th).$$prev().$$html());
 }
 </script>
-
-</body>
-</html>
