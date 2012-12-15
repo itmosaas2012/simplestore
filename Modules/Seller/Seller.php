@@ -21,14 +21,14 @@ class Seller {
 
     public function init() {
         if (!$this->check_permissions()) {
-            $this->error_page('Чтобы иметь доступ к этой странице вы должны иметь роль продавца розничного магазина!');
+            $this->error_page('Р§С‚РѕР±С‹ РёРјРµС‚СЊ РґРѕСЃС‚СѓРї Рє СЌС‚РѕР№ СЃС‚СЂР°РЅРёС†Рµ РІС‹ РґРѕР»Р¶РЅС‹ РёРјРµС‚СЊ СЂРѕР»СЊ РїСЂРѕРґР°РІС†Р° СЂРѕР·РЅРёС‡РЅРѕРіРѕ РјР°РіР°Р·РёРЅР°!');
             return;
         }
 
         if (isset($_SESSION['companyID']) && $_SESSION['companyID']) {
             $this->db = new StoreDB($_SESSION['companyID']);
         } else {
-            $this->error_page('Произошла ошибка...');
+            $this->error_page('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°...');
             return;
         }
 
@@ -41,7 +41,7 @@ class Seller {
                 $this->user_id = intval($user->userID);
                 $this->workplace_id = intval($user->workplaceID);
             } else {
-                $this->error_page('Произошла ошибка...');
+                $this->error_page('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°...');
                 return;
             }
         }
@@ -67,9 +67,9 @@ class Seller {
         }
 
         if ($added) {
-            $this->view['message_success'] = 'Заказ добавлен.';
+            $this->view['message_success'] = 'Р—Р°РєР°Р· РґРѕР±Р°РІР»РµРЅ.';
         } else {
-            $this->view['message_error'] = 'Закажите хотя бы один товар.';
+            $this->view['message_error'] = 'Р—Р°РєР°Р¶РёС‚Рµ С…РѕС‚СЏ Р±С‹ РѕРґРёРЅ С‚РѕРІР°СЂ.';
         }
     }
 
@@ -104,7 +104,7 @@ class Seller {
 
     private function check_permissions() {
         
-        if ($_SESSION['rank'] == 'Продавец магазина') {
+        if ($_SESSION['rank'] == 'РџСЂРѕРґР°РІРµС† РјР°РіР°Р·РёРЅР°') {
             return true;
         }
 

@@ -7,9 +7,9 @@
     <input type="hidden" name="form" value="request_items">
     <table class="table">
         <thead>
-        <th>Наименование товара</th>
-        <th>Общее количество товара</th>
-        <th>Количество реализованного товара</th>
+        <th>РќР°РёРјРµРЅРѕРІР°РЅРёРµ С‚РѕРІР°СЂР°</th>
+        <th>РћР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ С‚РѕРІР°СЂР°</th>
+        <th>РљРѕР»РёС‡РµСЃС‚РІРѕ СЂРµР°Р»РёР·РѕРІР°РЅРЅРѕРіРѕ С‚РѕРІР°СЂР°</th>
         </thead>
         <tbody>
         <?php foreach($view['items'] as $item): ?>
@@ -20,7 +20,7 @@
         </tr>
             <?php endforeach; ?>
         <tr>
-            <td colspan="5" style="text-align: right;"><button class="btn btn-primary btn-small" type="submit">Продолжить</button></td>
+            <td colspan="5" style="text-align: right;"><button class="btn btn-primary btn-small" type="submit">РџСЂРѕРґРѕР»Р¶РёС‚СЊ</button></td>
         </tr>
         </tbody>
     </table>
