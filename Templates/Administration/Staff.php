@@ -45,22 +45,23 @@
 
     <div class="form-div">
         <label class="form-label" for="workPlace1"> Место работы: </label>
-        <select name="workPlace1" id="workPlace1">
+        <select name="workPlace1" id="workPlace1" class="staff--workplace">
             <?php foreach ($view['workPlaces'] as $workPlace)
                 echo '<option value="'.$workPlace['id'].'">'.$workPlace['address'].'</option>';
             ?>
         </select>
-    </div>
-
-    <div class="form-div">
+        <br clear="all"/>
         <label class="form-label" for="role1"> Должность: </label>
-        <select name="role1" id="role1">
+        <select name="role1" id="role1" class="staff--position">
             <?php foreach ($view['roles'] as $role)
                 echo '<option value="'.$role['id'].'">'.$role['name'].'</option>';
             ?>
         </select>
     </div>
-
+    <div class="form-div" style="padding: 0 0 10px 80px;">
+        <a href="#" class="new-workplace">добавить место работы/должность</a>
+    </div>
+    
     <div class="form-div">
         <label class="form-label" for="phone"> Номер телефона: </label>
         <input class="form-input" type="text" name="phone" id="phone" />

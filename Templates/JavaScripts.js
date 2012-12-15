@@ -137,6 +137,38 @@ SS.newStaff = function() {
 				    var res = SS.translit(str);
 				    $('[name="login"]').val(res);
 				});
+				$form.on('click', 'a.new-workplace', function() {
+    				var cl = $(this).parent().prev('.form-div');
+    				var posId = parseInt(cl.find('select')[0].name.substring(9)) + 1;
+    				var newPos = cl.clone();
+    				newPos.html(cl.html().replace(/"(role|workPlace)(\d+)"/gi, '"$1'+posId+'"'));
+    				cl.after(newPos);
+    				$form.find('select.staff--workplace').each(function() {
+    					var $o = $(this);
+    					if(!$o.next().is('.staff--workplace-remove'))
+    						$o.after($('<a href="#" class="staff--workplace-remove">&times;</a>'));
+    				});
+    				return false;
+    			});
+    			$form.on('click', 'a.staff--workplace-remove', function() {
+    				var $cont = $(this).parent();
+    				var $coll = $form.find('a.staff--workplace-remove'),
+    					$last = $coll.last().parent(),
+    					removed = $coll.index(this);
+    				$(this).parent().slideUp('fast', function() {
+    					$last.hide();
+    					$(this).show();
+    					for(var i=0; i<$coll.length-1; i++) {
+	    					if(i<removed) continue;
+	    					$form.find('#role'+(i+1)).val($form.find('#role'+(i+2)).val());
+	    					$form.find('#workPlace'+(i+1)).val($form.find('#workPlace'+(i+2)).val());
+	    				}
+    					$last.remove();
+    				});
+    				if($coll.length==2)
+    					$form.find('a.staff--workplace-remove').remove();
+    				return false;
+    			});
 		    });
 		}
 	};
