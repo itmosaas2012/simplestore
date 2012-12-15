@@ -52,7 +52,7 @@ class Expert {
 */
         $this->view['items'] = $this->all_items();
 
-        $this->view['Content'] = 'Templates/Purchase/Purchase.php';
+        $this->view['Content'] = 'Templates/Expert/Expert.php';
     }
 
     private function process_request() {
