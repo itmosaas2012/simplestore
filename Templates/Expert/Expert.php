@@ -37,7 +37,7 @@
 
 var update = function(th){
     var elem_val = document.getElementsByName(th)[0].value;
-alert("1");
+alert(elem_val);
     var res_name = "result" + elem_val.substr(4);
 alert(res_name);
     var result_val = document.getElementsByName(res_name)[0].value;
