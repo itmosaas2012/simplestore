@@ -37,6 +37,13 @@
                     <a href="/Purchase">Закупщик магазина</a></li>
                 <li class="menuSeparator"></li>
                 <?php } ?>
+				
+                <!--Продавец магазина-->
+                <?php if($_SESSION['connected'] && $_SESSION['rank'] == 'Продавец магазина') { ?>
+                <li class="header_menu_item"><a href="#">
+                    <a href="/Seller">Продавец магазина</a></li>
+                <li class="menuSeparator"></li>
+                <?php } ?>				
         </ul>
     </nav>
 

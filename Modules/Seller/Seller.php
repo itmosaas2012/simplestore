@@ -54,7 +54,7 @@ class Seller {
 
         $this->view['Content'] = 'Templates/Seller/Seller.php';
     }
-/*
+
     private function process_request() {
         $added = 0;
         foreach ($_POST['item'] as $item_id => $item_count) {
@@ -85,7 +85,7 @@ class Seller {
 
         return $sth->execute();
     }
-*/
+
     public function all_items() {
         $items = array();
         $sth = $this->db->prepare('select i.*,
