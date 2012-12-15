@@ -20,8 +20,8 @@
             <td><?=$item->name?></td>
             <td><?=$item->ware_count?></td>
             <td><?=$item->sold_count?></td>
-			<td><input type="text" name="item[<?=$item->itemID?>]" value="0" onmouseout="update(this);"></td>
-            <td><?=$item->result?></td>
+            <td><input type="text" name="item[<?=$item->itemID?>]" value="0" onmouseout="update(this.name);"></td>
+            <td name="result[<?=$item->itemID?>]"><?=$item->result?></td>
             
         </tr>
             <?php endforeach; ?>
@@ -36,6 +36,11 @@
 <script type="text/javascript">
 
 var update = function(th){
-alert($$(th).$$prev().$$html());
+    var elem_val = document.getElementsByName(th)[0].value;
+alert("1");
+    var res_name = "result" + elem_val.substr(4);
+alert(res_name);
+    var result_val = document.getElementsByName(res_name)[0].value;
+alert(result_val);    
 }
 </script>
