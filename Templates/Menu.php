@@ -31,6 +31,25 @@
                 <li class="menuSeparator"></li>
                 <?php } ?>
 
+                    <li class="header_menu_item">
+                        Рабочея место
+                        <nav class="header_subMenu">
+                            <ul>
+                                <?php if(in_array('Товаровед склада', $ranks) || in_array('Администратор', $ranks)) { ?>
+                                    <li class="menuSeparator"></li>
+                                    <li class="heder_subMenu_item"><a href="/WorkPoint/WareHouseGoodsManager">Товаровед склада</a></li>
+
+                                <?php } if(in_array('Логист склада', $ranks) || in_array('Администратор', $ranks)) { ?>
+                                    <li class="menuSeparator"></li>
+                                    <li class="heder_subMenu_item"><a href="/WorkPoint/WareHouseLogist">Логист склада</a></li>
+
+                                <?php } ?>
+
+                                    <li class="menuSeparator"></li>
+                            </ul>
+                        </nav></li>
+                    <li class="menuSeparator"></li> 
+
                 <!--Закупщик магазина-->
                 <?php if($_SESSION['connected'] && $_SESSION['rank'] == 'Закупщик магазина') { ?>
                 <li class="header_menu_item"><a href="#">
