@@ -94,20 +94,22 @@ class Settings {
 
     public function all_items() {
         $items = array();
+		echo "1";
         $sth = $this->db->prepare('SELECT name as name, surname as surname, password as password, email as email, tell as tell FROM %user% WHERE login = ":user_login"');
-		
+		echo "2";
 		$sth->bindValue(':user_login', $_SESSION['login'], PDO::PARAM_STR);
-
+		echo "3";
         $sth->execute();
+		echo "4";
         while ($db_item = $sth->fetchObject()) {
-            //$db_item->name = $db_item->name;
-			//$db_item->surname = $db_item->surname;
-			//$db_item->password = $db_item->password;
-			//$db_item->email = $db_item->email;
-			//$db_item->tell = $db_item->tell;
-			$_SESSION['surname'] = $db_item->surname;
+            $db_item->name = $db_item->name;
+			$db_item->surname = $db_item->surname;
+			$db_item->password = $db_item->password;
+			$db_item->email = $db_item->email;
+			$db_item->tell = $db_item->tell;
             $items[] = $db_item;
         }
+		echo "5";
         return $items;
     }
 
