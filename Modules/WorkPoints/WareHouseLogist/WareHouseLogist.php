@@ -152,7 +152,7 @@ if($_SESSION['connected'])
                     for($i = 1;;$i++)
                     {
                         if(empty($_POST['product'.$i]) || empty($_POST['goodCount'.$i])) break;
-                        $sql = 'INSERT INTO deliveryObject_'.$_SESSION['companyID'].' (`itemID`, `deliveryID`, `count`) VALUES ('.$_POST['product'.$i].', '.$deliveryID.', '.$_POST['goodCount'.$i].')';
+                        $sql = 'INSERT INTO deliveryItem_'.$_SESSION['companyID'].' (`itemID`, `deliveryID`, `count`) VALUES ('.$_POST['product'.$i].', '.$deliveryID.', '.$_POST['goodCount'.$i].')';
                         $mysql->exec($sql);
                     }
 
@@ -187,10 +187,10 @@ if($_SESSION['connected'])
             foreach($pendingDelivery as $key => $eachPendingDelivery)
             {
                 $sql = 'SELECT count, name
-                        FROM deliveryObject_'.$_SESSION['companyID'].' as deliveryObject
+                        FROM deliveryItem_'.$_SESSION['companyID'].' as deliveryItem
                         INNER JOIN item_'.$_SESSION['companyID'].' as item
-                            ON deliveryObject.itemID=item.itemID
-                        WHERE deliveryObject.deliveryID='.$eachPendingDelivery['deliveryID'].'
+                            ON deliveryItem.itemID=item.itemID
+                        WHERE deliveryItem.deliveryID='.$eachPendingDelivery['deliveryID'].'
                         ORDER BY name ASC';
                 foreach ($mysql->query($sql) as $row)
                     $pendingDelivery[$key]['items'][] = array(   'name' => $row['name'],
