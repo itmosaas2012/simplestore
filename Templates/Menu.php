@@ -16,20 +16,26 @@
             <?php } ?>
 
                 <!--Administration-->
-                <?php if($_SESSION['connected'] && $_SESSION['rank'] == 'Администратор') { ?>
-                <li class="header_menu_item"><a href="#">
-                    <a href="/Administration">Администрация</a>
-                    <nav class="header_subMenu">
-                        <ul>
+                <?php
+                    if($_SESSION['connected']){
+                        $rank = array();
+                        foreach($_SESSION['post'] as $post) $ranks[] = $post['rank'];
+                        if(in_array('Администратор', $ranks)) { ?>
+
+                            <li class="header_menu_item">
+                                <a href="/Administration">Администрация</a>
+                                <nav class="header_subMenu">
+                                    <ul>
+                                        <li class="menuSeparator"></li>
+                                        <li class="heder_subMenu_item"><a href="/Administration/Staff">Управления соотрудников</a></li>
+                                        <li class="menuSeparator"></li>
+                                        <li class="heder_subMenu_item"><a href="/Administration/WorkPlaces">Управления пунктами</a></li>
+                                        <li class="menuSeparator"></li>
+                                    </ul>
+                                </nav></li>
                             <li class="menuSeparator"></li>
-                            <li class="heder_subMenu_item"><a href="/Administration/Staff">Управления соотрудников</a></li>
-                            <li class="menuSeparator"></li>
-                            <li class="heder_subMenu_item"><a href="/Administration/WorkPlaces">Управления пунктами</a></li>
-                            <li class="menuSeparator"></li>
-                        </ul>
-                    </nav></li>
-                <li class="menuSeparator"></li>
-                <?php } ?>
+
+                    <?php } ?>
 
                     <li class="header_menu_item">
                         Рабочее место
@@ -48,7 +54,8 @@
                                     <li class="menuSeparator"></li>
                             </ul>
                         </nav></li>
-                    <li class="menuSeparator"></li> 
+                    <li class="menuSeparator"></li>
+                <?php } ?>
 
                 <!--Закупщик магазина-->
                 <?php if($_SESSION['connected'] && $_SESSION['rank'] == 'Закупщик магазина') { ?>
