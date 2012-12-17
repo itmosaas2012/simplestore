@@ -33,7 +33,7 @@ class Purchase {
         }
 
         if (isset($_SESSION['login']) && $_SESSION['login']) {
-            $sth = $this->db->prepare('select * from %user% where login = :login');
+            $sth = $this->db->prepare('select * from %user% u where login = :login join %userRank% ur on u.userID = ur.userID where ur.rankID = 6');
             $sth->bindValue(':login', $_SESSION['login'], PDO::PARAM_INT);
             $sth->execute();
             $user = $sth->fetchObject();
@@ -107,9 +107,11 @@ class Purchase {
     }
 
     private function check_permissions() {
-        
-        if ($_SESSION['rank'] == 'Закупщик магазина') {
-            return true;
+
+        foreach($_SESSION['post'] as $post) {
+            if ($post['rank'] == 'Закупщик магазина' || $post['rank'] == 'Администратор') {
+                return true;
+            }
         }
 
         return false;
