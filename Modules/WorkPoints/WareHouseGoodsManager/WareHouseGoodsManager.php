@@ -29,7 +29,7 @@ if($_SESSION['connected'])
             }
             elseif($post['rank'] == 'Товаровед склада')
             {
-                if($post['workplace']['type'] == 'Склад')
+                if($post['workplace']['type'] == 'wh')
                     $possibleWorkPlaces[] = array('ID' => $post['workplace']['ID'],
                                                 'address' => $post['workplace']['address']);
 
@@ -78,7 +78,7 @@ if($_SESSION['connected'])
             }
             elseif($post['rank'] == 'Товаровед склада')
             {
-                if($post['workplace']['type'] == 'Склад')
+                if($post['workplace']['type'] == 'wh')
                     $possibleWorkPlaces[] = array('ID' => $post['workplace']['ID'],
                         'address' => $post['workplace']['address']);
 
