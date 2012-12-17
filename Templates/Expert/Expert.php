@@ -47,7 +47,8 @@ var update = function(th){
         }
         else
         {
-            var result = parseInt(elem_val) + parseInt(result_obj.innerHTML) - parseInt(prev_value);
+            var result_else = parseInt(elem_val) + parseInt(result_obj.innerHTML) - parseInt(prev_value);
+                result_obj.innerHTML = result_else;
             //modified = false;
             prev_value = parseInt(elem_val);
         }
