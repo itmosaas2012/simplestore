@@ -3,7 +3,8 @@
 <?php if (@$view['message_success']): ?></a><div class="message success"><?=$view['message_success']?></div><?php endif; ?>
 
 <?php if ($view['items']): ?>
-<form action="/SettingsTest" method="post">
+
+<form action="/Settings" method="post">
     <input type="hidden" name="form" value="request_items">
 	
 	<h2>Настройки аккаунта:</h2>
@@ -12,7 +13,7 @@
         <label class="form-label" for="familyName"> Логин: </label>
         <input class="form-input" type="text" name="familyName" id="familyName" disabled="true" value="<?php echo $_SESSION['login']?>"/>
     </div>
-
+    <?php foreach($view['items'] as $item): ?>
     <div class="form-div">
         <label class="form-label" for="familyName"> Фамилия: </label>
         <input class="form-input" type="text" name="familyName" id="familyName" value="<?=$item->surname?>"/>
@@ -43,7 +44,7 @@
         <label class="form-label" for="password2"> Пароль: </label>
         <input class="form-input" type="password" name="password2" id="password2" value="<?=$item->password?>"/>
     </div>
-	
+	<?php endforeach; ?>
     <div class="form-btn">
         <button class="btn btn-primary btn-small" type="submit">Сохранить изменения</button>
     </div>
