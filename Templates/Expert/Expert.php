@@ -35,6 +35,7 @@ var modified = false;
 var update = function(th){
     var elem_val = document.getElementsByName(th)[0].value;
     if (elem_val != "Nan"){
+    alert(prev_value);
         var res_name = 'result' + th.substr(4);
         var result_obj = document.getElementsByClassName(res_name)[0];        
         if (!modified)
