@@ -109,7 +109,7 @@ class Purchase {
     private function check_permissions() {
 
         foreach($_SESSION['post'] as $post) {
-            if ($post['rank'] == 'Закупщик магазина' || $post['rank'] == 'Администратор') {
+            if ($post['rank'] == 'Закупщик магазина') {
                 return true;
             }
         }
