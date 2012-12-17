@@ -2,7 +2,8 @@
 <?php if (@$view['message_error']): ?></a><div class="message error"><?=$view['message_error']?></div><?php endif; ?>
 <?php if (@$view['message_success']): ?></a><div class="message success"><?=$view['message_success']?></div><?php endif; ?>
 
-<?php if ($view['items']): ?>
+<!--?php if ($view['items']): ?-->
+
 <form action="/SettingsTest" method="post">
     <input type="hidden" name="form" value="request_items">
 	
@@ -48,4 +49,4 @@
         <button class="btn btn-primary btn-small" type="submit">Сохранить изменения</button>
     </div>
 </form>
-<?php endif; ?>
+<!--?php endif; ?-->
