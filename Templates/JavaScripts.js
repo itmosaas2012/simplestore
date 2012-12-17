@@ -29,13 +29,31 @@ window.SS = function() {
     };
     // public:
 	return {
-		validateField: function(conf) {
+		validateField: function(conf, strict) {
 		    var res;
+			if(typeof strict =='undefined')
+				if(typeof conf[2] == 'undefined')
+					var strict = false;
+				else var strict = conf[2];
 		    if(typeof conf[0]=='function')
 		        res = conf[0].call(this, $(this).val());
 		    else res = conf[0].test($(this).val());
-		    $(this).removeClass('error').next('span').remove();
-		    if(!res) {
+			// r = res
+			// s = hasClass('error')
+			// S = strict
+			/*r s	S	act
+			0 0 0	-
+			0 0 1	S
+			0 1 0	-
+			0 1 1	-
+			1 0 0	-
+			1 0 1	-
+			1 1 0	R
+			1 1 1	R*/
+			var st = $(this).hasClass('error');
+			if(res && st)
+				$(this).removeClass('error').next('span').remove();
+		    if(!res && !st && strict) {
 		        var err = $("<span></span>");
 		        err.html(conf[1]);
 		        $(this).addClass('error').after(err);
@@ -49,7 +67,7 @@ window.SS = function() {
 	            for(var p in conf) {
 	                if(!conf.hasOwnProperty(p)) return;
 	                var el = $(this).find('[name="'+p+'"]');
-	                res = (!el.length || SS.validateField.call(el[0], conf[p]))? res : false;
+	                res = (!el.length || SS.validateField.call(el[0], conf[p], true))? res : false;
 	            }
 	            return res;
 	        };
@@ -179,7 +197,8 @@ SS.registerForm = function() {
     var formConfig = {
             adminLogin: [
                 /^[a-z0-9._-]+$/i,
-                'Логин может содержать только символы латинского алфавита, цифры и знаки &quot;_&quot;, &quot;-&quot;, &quot;.&quot;.'
+                'Логин может содержать только символы латинского алфавита, цифры и знаки &quot;_&quot;, &quot;-&quot;, &quot;.&quot;.',
+				true
             ], 
             adminPassword: [
                 /^.{8,}$/i,
@@ -187,7 +206,8 @@ SS.registerForm = function() {
             ], 
             adminPasswordRepeated: [
                 function(val) { return val == $('#adminPassword').val(); },
-                'Введенные пароли не совпадают.'
+                'Введенные пароли не совпадают.',
+				true
             ], 
             adminEmail: [
             /* from: http://habrahabr.ru/post/55820/ */
