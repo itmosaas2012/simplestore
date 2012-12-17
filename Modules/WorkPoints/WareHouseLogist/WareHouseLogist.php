@@ -14,7 +14,6 @@ if($_SESSION['connected'])
         {
             if($post['rank'] == 'Администратор')
             {
-                echo $post['rank'];
                 $sql = 'SELECT workplaceID, address FROM workplace_'.$_SESSION['companyID'].' as workplace
                             INNER JOIN wpType
                                 ON workplace.wpTypeID = wpType.wpTypeID
