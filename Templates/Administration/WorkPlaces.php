@@ -24,8 +24,11 @@ echo '<div class="message success">'.$view['success'].'</div>';?>
     <div class="form-div">
         <label class="form-label" for="workPlace"> Тип пункта: </label>
         <select class="form-input" name="workPlace" id="workPlace">
-            <?php foreach ($view['wpTypes'] as $wpType)
-                echo '<option value="'.$wpType['id'].'">'.$wpType['description'].'</option>';
+            <?php foreach ($view['wpTypes'] as $wpType){
+                $trans = ($wpType['description']=='wh')?'Склад':'Магазин';
+                echo '<option value="'.$wpType['id'].'">'.$trans.'</option>';
+
+                }
             ?>
         </select>
     </div>
