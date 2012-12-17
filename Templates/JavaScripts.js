@@ -99,11 +99,11 @@ SS.newStaff = function() {
     var protectLogin = false;
     var formConfig = {
             surname: [
-                /^[а-яa-z- ']+$/i,
+                /^[а-яa-z '-]+$/i,
                 'Некорректная фамилия.'
             ], 
             name: [
-                /^[а-яa-z- ']+$/i,
+                /^[а-яa-z '-]+$/i,
                 'Некорректное имя.'
             ], 
             patronymic: [
@@ -341,11 +341,11 @@ SS.whLogist = function() {
 SS.settingsForm = function() {
     var formConfig = {
             familyName: [
-                /^[а-яa-z- ']*$/i,
+                /^[а-яa-z '-]*$/i,
                 'Некорректная фамилия.'
             ], 
             givenName: [
-                /^[а-яa-z- ']*$/i,
+                /^[а-яa-z '-]*$/i,
                 'Некорректное имя.'
             ], 
             phone: [

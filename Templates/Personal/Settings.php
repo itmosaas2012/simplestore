@@ -4,14 +4,15 @@
 
 <?php if ($view['items']): ?>
 
-<form action="/Settings" method="post">
+<script type="text/javascript">SS.settingsForm.init('<?php echo htmlspecialchars($_SESSION['company'], ENT_QUOTES);?>');</script>
+<form action="/Settings" method="post" class="settings-form">
     <input type="hidden" name="form" value="request_items">
 	
 	<h2>Настройки аккаунта:</h2>
 	
     <div class="form-div">
-        <label class="form-label" for="familyName"> Логин: </label>
-        <input class="form-input" type="text" name="familyName" id="familyName" disabled="true" value="<?php echo $_SESSION['login']?>"/>
+        <label class="form-label" for="login"> Логин: </label>
+        <input class="form-input" type="text" name="login" id="login" disabled="true" value="<?php echo $_SESSION['login']?>"/>
     </div>
     <?php foreach($view['items'] as $item): ?>
     <div class="form-div">
@@ -38,6 +39,8 @@
     <div class="form-div">
         <label class="form-label" for="password"> Пароль: </label>
         <input class="form-input" type="password" name="password" id="password" value="<?=$item->password?>"/>
+		<br clear="all" />
+		<div class="password-diff"><div class="password-diff--progressBar"><div class="password-diff--progress"></div></div> <span class="password-diff--comment">ненадежный</span></div>
     </div>
 	
     <div class="form-div">
