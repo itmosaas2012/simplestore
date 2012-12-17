@@ -68,7 +68,7 @@ var s = document.createElement('script'); s.type = 'text/javascript'; s.async = 
              <a href="/Connection"> Вход </a>
              <a href="/Registration"> Регистрация </a>
          <?php } else {?>
-         	 <span> Вы вошли, как <?php echo $_SESSION['rank']; ?><span>
+         	 <span> Добро пожалувать <?php echo $_SESSION['login']; ?><span>
              <a href="/Logout"> Выход </a>
          <?php }?>
      	</div>
