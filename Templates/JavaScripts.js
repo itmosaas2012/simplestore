@@ -294,9 +294,9 @@ SS.whLogist = function() {
 				$form.on('submit', function() {
 					var res = true;
 					$form.find('.whLogist-goodCount').each(function() {
-						res = res && SS.validateField.call(this, [function(val) {return val>0;}, 'Количество товара должно быть больше нуля.'], true);
+						if(!SS.validateField.call(this, [function(val) {return val>0;}, 'Количество товара должно быть больше нуля.'], true)) res = false;
 					});
-					res = res && SS.validateField.call($form.find('[name="responsible"]'), [/\S+/, 'Необходимо назначить ответственного.'], true);
+					if(!SS.validateField.call($form.find('[name="responsible"]')[0], [/\S+/, 'Необходимо назначить ответственного.'], true)) res = false;
 					return res;
 				});
 				// $form.on('keyup', 'input', function() { SS.validateField.call(this, formConfig[this.name]); });
