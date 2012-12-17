@@ -3,7 +3,7 @@
 <?php if (@$view['message_success']): ?></a><div class="message success"><?=$view['message_success']?></div><?php endif; ?>
 
 <?php if ($view['items']): ?>
-<form action="/Settings" method="post">
+<form action="/SettingsTest" method="post">
     <input type="hidden" name="form" value="request_items">
 	
 	<h2>Настройки аккаунта:</h2>
