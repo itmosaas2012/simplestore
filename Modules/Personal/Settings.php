@@ -53,14 +53,24 @@ class Settings {
 
     private function process_request() {
         $added = 0;
-        foreach ($_POST['item'] as $item_id => $item_count) {
-            $item_id = intval($item_id);
-            $item_count = intval($item_count);
-            if ($item_count > 0) {
-                $this->db_request_add($item_id, $item_count);
-                $added++;
-            }
-        }
+        $surname = trim($_POST['familyName']); htmlspecialchars($surname); mysql_escape_string($surname);
+	    $name = trim($_POST['givenName']); htmlspecialchars($name); mysql_escape_string($name);
+	    $tell = trim($_POST['phone']); htmlspecialchars($tell); mysql_escape_string($tell);
+	    $email = trim($_POST['email']); htmlspecialchars($email); mysql_escape_string($email);
+	    $pass = trim($_POST['password']); htmlspecialchars($pass); mysql_escape_string($pass);
+	    $pass2 = trim($_POST['password2']); htmlspecialchars($pass2); mysql_escape_string($pass2);
+	
+	    if ($pass != "" && $pass2 != ""){
+	        if ($pass == $pass2){
+			    this->db_request_update($name, $surname, $pass, $email, $tell);
+		    }
+		    else{
+		        $this->view['message_error'] = 'Пароли не совпадают.';
+		    }
+	    }
+	    else{
+		    $this->view['message_error'] = 'Пароли не введены.';
+	    }	
 
         if ($added) {
             $this->view['message_success'] = 'Данные успешно обновлены.';
@@ -69,20 +79,26 @@ class Settings {
         }
     }
 
-    private function db_request_add($item_id, $item_count) {
-        $sth = $this->db->prepare('insert into %soldItem% set
-                                itemID = :itemID,
-                                count = :count');
+    private function db_request_update($name, $surname, $pass, $email, $tell) {
+        $sth = $this->db->prepare('UPDATE user_:user_id SET name=":user_name", surname=":user_surname", password=":user_password", email=":user_email", tell=":user_tell" WHERE login=":user_login"');
 
-        $sth->bindValue(':itemID', $item_id, PDO::PARAM_INT);
-        $sth->bindValue(':count', $item_count, PDO::PARAM_INT);
+        $sth->bindValue(':user_id', $_SESSION['companyID'], PDO::PARAM_INT);
+        $sth->bindValue(':user_name', $name, PDO::PARAM_STR);
+		$sth->bindValue(':user_surname', $surname, PDO::PARAM_STR);
+		$sth->bindValue(':user_password', $pass, PDO::PARAM_STR);
+		$sth->bindValue(':user_email', $email, PDO::PARAM_STR);
+		$sth->bindValue(':user_tell', $tell, PDO::PARAM_STR);
+		$sth->bindValue(':user_login', $_SESSION['login'], PDO::PARAM_STR);
 
         return $sth->execute();
     }
 
     public function all_items() {
         $items = array();
-        $sth = $this->db->prepare('SELECT name, surname, password, email, tell FROM user_' . $_SESSION['companyID'] . 'WHERE login="'. $_SESSION['login'] .'"');
+        $sth = $this->db->prepare('SELECT name, surname, password, email, tell FROM user_:user_id WHERE login = ":user_login"');
+		
+		$sth->bindValue(':user_id', $_SESSION['companyID'], PDO::PARAM_STR);
+		$sth->bindValue(':user_login', $_SESSION['login'], PDO::PARAM_STR);
 
         $sth->execute();
         while ($db_item = $sth->fetchObject()) {
