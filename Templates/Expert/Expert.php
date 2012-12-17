@@ -32,11 +32,16 @@
 
 var update = function(th){
     var elem_val = document.getElementsByName(th)[0].value;
-    var res_name = 'result' + th.substr(4);
-    var result_obj = document.getElementsByClassName(res_name)[0];
-    var result = parseInt(elem_val) + parseInt(result_obj.innerHTML);
-
-    result_obj.innerHTML = result;
+    if (elem_val != "Nan"){
+        var res_name = 'result' + th.substr(4);
+        var result_obj = document.getElementsByClassName(res_name)[0];
+        var result = parseInt(elem_val) + parseInt(result_obj.innerHTML);
+            result_obj.innerHTML = result;
+    }
+    else{
+        var result_obj = document.getElementsByClassName(res_name)[0];
+            result_obj.innerHTML = '0';
+    }
 }
 
 </script>
