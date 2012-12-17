@@ -131,8 +131,8 @@ if($_SESSION['connected'])
                         $sql = 'SELECT itemID FROM item_'.$_SESSION['companyID'].' WHERE name="'.$_POST['existentGoodName'].'"';
                         foreach ($mysql->query($sql) as $row) $itemID = $row['itemID'];
 
-                        $sql = 'SELECT count(objectID) FROM object_'.$_SESSION['companyID'].' WHERE itemID='.$itemID.' AND workplaceID="'.$currentWorkPlace['ID'].'"';
-                        foreach ($mysql->query($sql) as $row) $existingObjectCount = $row['count(objectID)'];
+                        $sql = 'SELECT count(itemID) FROM object_'.$_SESSION['companyID'].' WHERE itemID='.$itemID.' AND workplaceID="'.$currentWorkPlace['ID'].'"';
+                        foreach ($mysql->query($sql) as $row) $existingObjectCount = $row['count(itemID)'];
 
                         if($existingObjectCount == 0)
                         {
