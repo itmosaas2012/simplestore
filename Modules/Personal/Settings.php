@@ -100,11 +100,12 @@ class Settings {
 
         $sth->execute();
         while ($db_item = $sth->fetchObject()) {
-            $db_item->name = $db_item->name;
-			$db_item->surname = $db_item->surname;
-			$db_item->password = $db_item->password;
-			$db_item->email = $db_item->email;
-			$db_item->tell = $db_item->tell;
+            //$db_item->name = $db_item->name;
+			//$db_item->surname = $db_item->surname;
+			//$db_item->password = $db_item->password;
+			//$db_item->email = $db_item->email;
+			//$db_item->tell = $db_item->tell;
+			$_SESSION['surname'] = $db_item->surname;
             $items[] = $db_item;
         }
         return $items;

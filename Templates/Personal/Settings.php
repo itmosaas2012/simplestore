@@ -16,33 +16,33 @@
 
     <div class="form-div">
         <label class="form-label" for="familyName"> Фамилия: </label>
-        <input class="form-input" type="text" name="familyName" id="familyName" value="<?=$item->surname?>"/>
+        <input class="form-input" type="text" name="familyName" id="familyName" value="<?php echo $_SESSION['surname']?>"/>
     </div>
 
     <div class="form-div">
         <label class="form-label" for="givenName"> Имя: </label>
-        <input class="form-input" type="text" name="givenName" id="givenName" value="<?=$item->name?>"/>
+        <input class="form-input" type="text" name="givenName" id="givenName" value=""/>
     </div>
 
     <div class="form-div">
         <label class="form-label" for="phone"> Номер телефона: </label>
-        <input class="form-input" type="text" name="phone" id="phone" value="<?=$item->tell?>"/>
+        <input class="form-input" type="text" name="phone" id="phone" value=""/>
     </div>
 
     <div class="form-div">
         <label class="form-label" for="email"> Электронная почта: </label>
-        <input class="form-input" type="email" name="email" id="email" value="<?=$item->email?>"/>
+        <input class="form-input" type="email" name="email" id="email" value=""/>
     </div>
 
 
     <div class="form-div">
         <label class="form-label" for="password"> Пароль: </label>
-        <input class="form-input" type="password" name="password" id="password" value="<?=$item->password?>"/>
+        <input class="form-input" type="password" name="password" id="password" value=""/>
     </div>
 	
     <div class="form-div">
         <label class="form-label" for="password2"> Пароль: </label>
-        <input class="form-input" type="password" name="password2" id="password2" value="<?=$item->password?>"/>
+        <input class="form-input" type="password" name="password2" id="password2" value=""/>
     </div>
 	
     <div class="form-btn">
