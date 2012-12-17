@@ -144,7 +144,7 @@ if($_SESSION['connected'])
                 {
                     $responsible = empty($_POST['responsible'])?'NULL':'"'.$_POST['responsible'].'"';
 
-                    $sql = 'INSERT INTO delivery_'.$_SESSION['companyID'].' (`responsible`, `dispatchTime`, `from`, `to`) VALUES ('.$responsible.','.CURRENT_TIMESTAMP.', "'.$_POST['pickup'].'", "'.$_POST['destination'].'");';
+                    $sql = 'INSERT INTO delivery_'.$_SESSION['companyID'].' (`responsible`, `dispatchTime`, `from`, `to`) VALUES ('.$responsible.', CURRENT_TIMESTAMP, "'.$_POST['pickup'].'", "'.$_POST['destination'].'");';
                     $mysql->exec($sql);
 
                     $deliveryID = $mysql->lastInsertId();
