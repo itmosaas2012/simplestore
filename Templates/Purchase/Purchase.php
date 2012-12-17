@@ -35,4 +35,6 @@
         </tbody>
     </table>
 </form>
-<?php endif; ?>
+<?php else: ?>
+<div class="message error">Нет товаров.</div>
+<?php endif;?>
