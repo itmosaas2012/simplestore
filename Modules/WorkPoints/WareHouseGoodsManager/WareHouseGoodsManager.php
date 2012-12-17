@@ -19,7 +19,7 @@ if($_SESSION['connected'])
                 $sql = 'SELECT workplaceID, address FROM workplace_'.$_SESSION['companyID'].' as workplace
                             INNER JOIN wpType
                                 ON workplace.wpTypeID = wpType.wpTypeID
-                            WHERE wpType.description="Склад"';
+                            WHERE wpType.description="wh"';
 
                 foreach ($mysql->query($sql) as $row)
                     $possibleWorkPlaces[] = array('ID' => $row['workplaceID'],
@@ -68,7 +68,7 @@ if($_SESSION['connected'])
                 $sql = 'SELECT workplaceID, address FROM workplace_'.$_SESSION['companyID'].' as workplace
                                 INNER JOIN wpType
                                     ON workplace.wpTypeID = wpType.wpTypeID
-                                WHERE wpType.description="Склад"';
+                                WHERE wpType.description="wh"';
 
                 foreach ($mysql->query($sql) as $row)
                     $possibleWorkPlaces[] = array('ID' => $row['workplaceID'],
