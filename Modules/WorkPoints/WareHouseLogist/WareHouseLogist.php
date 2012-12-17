@@ -92,7 +92,7 @@ if($_SESSION['connected'])
             $view['error'] = 'Incorrect work place, pleas contact the administrator';
         else
         {
-            $view['askedWorkPlace'] = $askedWorkPlace;
+            $view['askedWorkPlace'] = $currentWorkPlace;
 
             $sql = 'SELECT itemID, name FROM item_'.$_SESSION['companyID'];
             foreach ($mysql->query($sql) as $row) $items[] = array('ID' => $row['itemID'], 'name' => $row['name']);
@@ -111,7 +111,7 @@ if($_SESSION['connected'])
             foreach ($wareHouses as $wareHouse)
             {
                 if($count == 0) $temp = $wareHouse;
-                if($wareHouse['ID'] == $askedWorkPlace['ID'])
+                if($wareHouse['ID'] == $currentWorkPlace['ID'])
                 {
                     $wareHouses[0] = $wareHouse;
                     $wareHouses[$count] = $wareHouse;

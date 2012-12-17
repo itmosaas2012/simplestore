@@ -154,7 +154,7 @@ if($_SESSION['connected'])
             $view['currentWorkPlace'] = $currentWorkPlace;
             $sql = 'SELECT name FROM item_'.$_SESSION['companyID'];
             foreach ($mysql->query($sql) as $row) $nameList[] = $row['name'];
-            $view['nameList'] = $nameList;
+            if(!empty($nameList)) $view['nameList'] = $nameList;
             $view['step'] = 2;
         }
 
