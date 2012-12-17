@@ -45,6 +45,7 @@ elseif($_SERVER['REQUEST_URI'] === '/Settings') require_once 'Modules/Personal/A
 elseif($_SERVER['REQUEST_URI'] === '/Purchase') require_once 'Modules/Purchase/Purchase.php';
 elseif($_SERVER['REQUEST_URI'] === '/Seller') require_once 'Modules/Seller/Seller.php';
 elseif($_SERVER['REQUEST_URI'] === '/Expert') require_once 'Modules/Expert/Expert.php';
+elseif($_SERVER['REQUEST_URI'] === '/Administration/Log') require_once 'Modules/Log/Log.php';
 elseif(substr_compare($_SERVER['REQUEST_URI'], '/Administration', 0, 15, true)===0) require_once 'Modules/Administration/Administration.php';
 elseif(substr_compare($_SERVER['REQUEST_URI'], '/WorkPoint/WareHouseGoodsManager', 0, 32, true)===0) require_once 'Modules/WorkPoints/WareHouseGoodsManager/WareHouseGoodsManager.php';
 elseif(substr_compare($_SERVER['REQUEST_URI'], '/WorkPoint/WareHouseLogist', 0, 26, true)===0) require_once 'Modules/WorkPoints/WareHouseLogist/WareHouseLogist.php'; 
