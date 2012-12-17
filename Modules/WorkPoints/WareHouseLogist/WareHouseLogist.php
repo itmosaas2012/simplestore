@@ -114,7 +114,7 @@ if($_SESSION['connected'])
                 if($wareHouse['ID'] == $currentWorkPlace['ID'])
                 {
                     $wareHouses[0] = $wareHouse;
-                    $wareHouses[$count] = $wareHouse;
+                    $wareHouses[$count] = $temp;
                 }
 
                 $count++;
