@@ -48,8 +48,8 @@ var update = function(th){
         else
         {
             var result = parseInt(elem_val) + parseInt(result_obj.innerHTML) - parseInt(prev_value);
-            modified = false;
-            prev_value = 0;
+            //modified = false;
+            prev_value = parseInt(elem_val);
         }
     }
 }
