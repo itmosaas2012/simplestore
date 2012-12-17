@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__.'/../StoreDB/StoreDB.php';
+require_once __DIR__.'/../LogService/LogService.php';
 
 StoreDB::$MYSQL = $mysql;
 
