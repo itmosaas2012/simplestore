@@ -4,7 +4,7 @@
 
 <?php if ($view['items']): ?>
 
-<form action="/SettingsTest" method="post">
+<form action="/Settings" method="post">
     <input type="hidden" name="form" value="request_items">
 	
 	<h2>Настройки аккаунта:</h2>
