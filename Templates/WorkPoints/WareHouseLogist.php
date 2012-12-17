@@ -120,8 +120,8 @@ elseif($view['step'] == 2) {?>
                     <?php } ?>
                 </ul>
             </td>
-            $trans1 = ($pendingDelivery['workplaceFromAddress']=='wh')?'Склад':'Магазин';
-            $trans2 = ($pendingDelivery['workplaceToAddress']=='wh')?'Склад':'Магазин';
+                <?php   $trans1 = ($pendingDelivery['workplaceFromAddress']=='wh')?'Склад':'Магазин';
+                        $trans2 = ($pendingDelivery['workplaceToAddress']=='wh')?'Склад':'Магазин';?>
             <td><?php echo $pendingDelivery['workplaceFromType'].': '.$trans1;?></td>
             <td><?php echo $pendingDelivery['workplaceToType'].': '.$trans2;?></td>
             <td><?php echo $pendingDelivery['responsible'];?></td>
