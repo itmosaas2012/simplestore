@@ -12,9 +12,9 @@ if($_SESSION['connected'])
     {
         foreach($_SESSION['post'] as $post)
         {
-            echo $post['rank'];
             if($post['rank'] == 'Администратор')
             {
+                echo $post['rank'];
                 $sql = 'SELECT workplaceID, address FROM workplace_'.$_SESSION['companyID'].' as workplace
                             INNER JOIN wpType
                                 ON workplace.wpTypeID = wpType.wpTypeID
