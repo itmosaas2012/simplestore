@@ -80,7 +80,7 @@ class Settings {
     }
 
     private function db_request_update($name, $surname, $pass, $email, $tell) {
-        $sth = $this->db->prepare('UPDATE %user% SET name=":user_name", surname=":user_surname", password=":user_password", email=":user_email", tell=":user_tell" WHERE login=":user_login"');
+        $sth = $this->db->prepare('UPDATE %user% SET name = :user_name, surname = :user_surname, password = :user_password, email = :user_email, tell = :user_tell WHERE login = :user_login');
 
         $sth->bindValue(':user_name', $name, PDO::PARAM_STR);
 		$sth->bindValue(':user_surname', $surname, PDO::PARAM_STR);
@@ -94,7 +94,7 @@ class Settings {
 
     public function all_items() {
         $items = array();
-        $sth = $this->db->prepare('SELECT name as name, surname as surname, password as password, email as email, tell as tell FROM %user% WHERE login = ":user_login"');
+        $sth = $this->db->prepare('SELECT name as name, surname as surname, password as password, email as email, tell as tell FROM %user% WHERE login = :user_login');
 		$sth->bindValue(':user_login', $_SESSION['login'], PDO::PARAM_STR);
         $sth->execute();
         while ($db_item = $sth->fetchObject()) {
