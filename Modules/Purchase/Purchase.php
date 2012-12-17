@@ -36,7 +36,7 @@ class Purchase {
 
         if (isset($_SESSION['login']) && $_SESSION['login']) {
             $sth = $this->db->prepare('select * from %user% u join %userRank% ur on u.userID = ur.userID where login = :login and ur.rankID = 6');
-            $sth->bindValue(':login', $_SESSION['login'], PDO::PARAM_INT);
+            $sth->bindValue(':login', $_SESSION['login'], PDO::PARAM_STR);
             $sth->execute();
             $user = $sth->fetchObject();
             if ($user) {
