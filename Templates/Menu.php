@@ -49,13 +49,26 @@
                                     <li class="menuSeparator"></li>
                                     <li class="heder_subMenu_item"><a href="/WorkPoint/WareHouseLogist">Логист склада</a></li>
 
+
+                                <?php } if(in_array('Закупщик магазина', $ranks) || in_array('Администратор', $ranks)) { ?>
+                                    <li class="menuSeparator"></li>
+                                    <li class="heder_subMenu_item"><a href="/Purchase">Закупщик магазина</a></li>
+
+
+                                <?php } if(in_array('Продавец магазина', $ranks) || in_array('Администратор', $ranks)) { ?>
+                                    <li class="menuSeparator"></li>
+                                    <li class="heder_subMenu_item"><a href="/Seller">Продавец магазина</a></li>
+
+
+                                <?php } if(in_array('Товароввед магазина', $ranks) || in_array('Администратор', $ranks)) { ?>
+                                    <li class="menuSeparator"></li>
+                                    <li class="heder_subMenu_item"><a href="/Expert">Товароввед магазина</a></li>
                                 <?php } ?>
 
-                                    <li class="menuSeparator"></li>
-                            </ul>
+                             </ul>
                         </nav></li>
                     <li class="menuSeparator"></li>
-                <?php } ?>
+                <?php } /*?>
 
                 <!--Закупщик магазина-->
                 <?php if($_SESSION['connected'] && $_SESSION['rank'] == 'Закупщик магазина') { ?>
@@ -76,7 +89,7 @@
                 <li class="header_menu_item"><a href="#">
                     <a href="/Expert">Товаровед магазина</a></li>
                 <li class="menuSeparator"></li>
-                <?php } ?>					
+                <?php } */?>
         </ul>
     </nav>
 
