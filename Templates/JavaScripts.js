@@ -38,18 +38,6 @@ window.SS = function() {
 		    if(typeof conf[0]=='function')
 		        res = conf[0].call(this, $(this).val());
 		    else res = conf[0].test($(this).val());
-			// r = res
-			// s = hasClass('error')
-			// S = strict
-			/*r s	S	act
-			0 0 0	-
-			0 0 1	S
-			0 1 0	-
-			0 1 1	-
-			1 0 0	-
-			1 0 1	-
-			1 1 0	R
-			1 1 1	R*/
 			var st = $(this).hasClass('error');
 			if(res && st)
 				$(this).removeClass('error').next('span').remove();
@@ -85,6 +73,24 @@ window.SS = function() {
 		        else res+= '_';
 		    }
 		    return res;
+		},
+		
+		passwordDiff: function(pass) {
+			var result = {score: 0, title: '', level: 0};
+			var classes = {digit: 0, chr: 0, punct: 0};
+			for(var i=0; i<pass.length; i++) {
+				var c = pass.charAt(i);
+				if(c>='0' && c<='9') classes.digit++;
+				else if(/[a-zа-я _]/i.test(c)) classes.chr++;
+				else if(',.`~!@#$%^&*()+-="№;?{}[]<>/\\'.indexOf(c)!=-1) classes.punct++;
+			}
+			result.score = classes.digit + classes.chr*2.1 + classes.punct*1.3;
+			result.score = Math.min(Math.round(result.score*4), 100);
+			if(result.score < 50 && pass.length < 8) { result.title = 'ненадежный'; result.color = '#f00'; result.level = 0; }
+			else if(result.score < 75) { result.title = 'слабый'; result.color = '#FF5F5F'; result.level = 1; }
+			else if(result.score < 100) { result.title = 'средний'; result.color = '#56E500'; result.level = 2; }
+			else { result.title = 'надежный'; result.color = '#4DCD00'; result.level = 3; }
+			return result;
 		}
 	};
 }();
@@ -134,8 +140,8 @@ SS.newStaff = function() {
                 'Логин может содержать только символы латинского алфавита, цифры и знаки &quot;_&quot;, &quot;-&quot;, &quot;.&quot;.'
             ], 
             password: [
-                /^.{8,}$/i,
-                'Длина пароля должна быть не менее 8 символов.'
+                function(val) { return SS.passwordDiff(val).level > 0; },
+                'Ненадежный пароль.'
             ]
         };
 
@@ -146,6 +152,12 @@ SS.newStaff = function() {
 				$form.on('submit', SS.validateForm(formConfig));
 				$form.on('keyup', 'input', function() { SS.validateField.call(this, formConfig[this.name]); });
 				$form.on('keydown', '[name="login"]', function() { protectLogin = true; });
+				$form.on('keyup', '[name="password"]', function() {
+					var $o = $(this);
+					var res = SS.passwordDiff(this.value);
+					$o.siblings('.password-diff').find('.password-diff--progress').css('background', res.color).css('width', res.score+'%');
+					$o.siblings('.password-diff').find('.password-diff--comment').html(res.title);
+				});
 				$form.on('keyup', '[name="surname"], [name="name"]', function() {
 				    if(protectLogin) return true;
 				    var str = $('[name="name"]').val();
@@ -193,6 +205,24 @@ SS.newStaff = function() {
 }();
 
 
+SS.registerForm1 = function() {
+    return {
+    	init: function () {
+    		$(function() {
+				var warned = false;
+    			var $form = $('form.register-form');
+    			$form.on('submit', function() {
+					if(warned) return true;
+					var $warning = $('<div style="display: none; width: 400px; text-align: center;">Пожалуйста, проверьте введенные данные<br/>и нажмите "Продолжить" еще раз.</div>');
+					$warning.insertBefore($form.find('button[type="submit"]').parent()).slideDown('fast');
+					warned = true;
+					return false;
+				});
+    		});
+    	}
+    };
+}();
+
 SS.registerForm = function() {
     var formConfig = {
             adminLogin: [
@@ -201,8 +231,8 @@ SS.registerForm = function() {
 				true
             ], 
             adminPassword: [
-                /^.{8,}$/i,
-                'Длина пароля должна быть не менее 8 символов.'
+                function(val) { return SS.passwordDiff(val).level > 1; },
+                'Недостаточно надежный пароль.'
             ], 
             adminPasswordRepeated: [
                 function(val) { return val == $('#adminPassword').val(); },
@@ -221,6 +251,12 @@ SS.registerForm = function() {
     			var $form = $('form.register-form');
     			$form.on('submit', SS.validateForm(formConfig));
     			$form.on('keyup', 'input', function() { SS.validateField.call(this, formConfig[this.name]); });
+				$form.on('keyup', '[name="adminPassword"]', function() {
+					var $o = $(this);
+					var res = SS.passwordDiff(this.value);
+					$o.siblings('.password-diff').find('.password-diff--progress').css('background', res.color).css('width', res.score+'%');
+					$o.siblings('.password-diff').find('.password-diff--comment').html(res.title);
+				});
     		});
     	}
     };

@@ -89,6 +89,8 @@
     <div class="form-div">
         <label class="form-label" for="password"> Пароль: </label>
         <input class="form-input" type="password" name="password" id="password" />
+		<br clear="all" />
+		<div class="password-diff"><div class="password-diff--progressBar"><div class="password-diff--progress"></div></div> <span class="password-diff--comment">ненадежный</span></div>
     </div>
 
     <div class="form-btn">

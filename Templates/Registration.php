@@ -12,6 +12,7 @@
 <form method="post" action="/Registration" class="register-form">
 
 <?php if($view['step'] == 1) {?>
+<script type="text/javascript">SS.registerForm1.init();</script>
     <h2>Введите данные, относящейся к компании</h2>
     <div class="form-div">
 	    <label class="form-label" for="companyName"> Название компании: </label>
@@ -31,6 +32,8 @@
     <div class="form-div">
 	    <label class="form-label" for="adminPassword"> Пароль: </label>
 	    <input class="form-input" type="password" name="adminPassword" id="adminPassword" />
+		<br clear="all" />
+		<div class="password-diff"><div class="password-diff--progressBar"><div class="password-diff--progress"></div></div> <span class="password-diff--comment">ненадежный</span></div>
     </div>
     <div class="form-div">
 	    <label class="form-label" for="adminPasswordRepeated"> Повторите пароль: </label>
