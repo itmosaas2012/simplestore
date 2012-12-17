@@ -23,11 +23,11 @@
                         if(in_array('Администратор', $ranks)) { ?>
 
                             <li class="header_menu_item">
-                                <a href="/Administration">Администрация</a>
+                                Администрация
                                 <nav class="header_subMenu">
                                     <ul>
                                         <li class="menuSeparator"></li>
-                                        <li class="heder_subMenu_item"><a href="/Administration/Staff">Управления соотрудников</a></li>
+                                        <li class="heder_subMenu_item"><a href="/Administration/Staff">Управления сотрудников</a></li>
                                         <li class="menuSeparator"></li>
                                         <li class="heder_subMenu_item"><a href="/Administration/WorkPlaces">Управления пунктами</a></li>
                                         <li class="menuSeparator"></li>
@@ -64,7 +64,7 @@
 
                                 <?php } if(in_array('Товароввед магазина', $ranks) || in_array('Администратор', $ranks)) { ?>
                                     <li class="menuSeparator"></li>
-                                    <li class="heder_subMenu_item"><a href="/Expert">Товароввед магазина</a></li>
+                                    <li class="heder_subMenu_item"><a href="/Expert">Товаровед магазина</a></li>
                                 <?php } ?>
 
                              </ul>
