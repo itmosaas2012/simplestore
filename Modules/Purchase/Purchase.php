@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__.'/../StoreDB/StoreDB.php';
+require_once __DIR__.'/../LogService/LogService.php';
 
 StoreDB::$MYSQL = $mysql;
 
@@ -27,6 +28,7 @@ class Purchase {
 
         if (isset($_SESSION['companyID']) && $_SESSION['companyID']) {
             $this->db = new StoreDB($_SESSION['companyID']);
+            LogService::$STOREDB = $this->db;
         } else {
             $this->error_page('Произошла ошибка...');
             return;
@@ -68,6 +70,7 @@ class Purchase {
 
         if ($added) {
             $this->view['message_success'] = 'Заказ добавлен.';
+            LogService::log_event('Добавлен заказ.');
         } else {
             $this->view['message_error'] = 'Закажите хотя бы один товар.';
         }
