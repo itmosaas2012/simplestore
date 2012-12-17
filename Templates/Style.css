@@ -670,7 +670,8 @@ outline:0;outline:thin dotted \9;
 .staff--workplace, .staff--position {
   width: 200px;
 }
-.staff--workplace-remove {
+.staff--workplace-remove,
+.whLogist--product-remove {
   font-size: 24px;
   padding-left: 12px;
 }

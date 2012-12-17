@@ -248,3 +248,55 @@ SS.whGoodsManager = function() {
 		},
 	};
 }();
+
+
+SS.whLogist = function() {
+    return {
+	    init: function() {
+		    $(function() {
+		    	var $form = $('form.wh-logist-form');
+				$form.on('submit', function() {
+					var res = true;
+					$form.find('.whLogist-goodCount').each(function() {
+						res = res && SS.validateField.call(this, [function(val) {return val>0;}, 'Количество товара должно быть больше нуля.'], true);
+					});
+					res = res && SS.validateField.call($form.find('[name="responsible"]'), [/\S+/, 'Необходимо назначить ответственного.'], true);
+					return res;
+				});
+				// $form.on('keyup', 'input', function() { SS.validateField.call(this, formConfig[this.name]); });
+				$form.on('click', 'a.new-position', function() {
+    				var cl = $(this).parent().prev('.form-div');
+    				var posId = parseInt(cl.find('.whLogist-goodCount')[0].name.substring(9)) + 1;
+    				var newPos = cl.clone();
+    				newPos.html(cl.html().replace(/"(product|goodCount)(\d+)"/gi, '"$1'+posId+'"'));
+    				cl.after(newPos);
+    				$form.find('.whLogist-product').each(function() {
+    					var $o = $(this);
+    					if(!$o.next().is('.whLogist--product-remove'))
+    						$o.after($('<a href="#" class="whLogist--product-remove">&times;</a>'));
+    				});
+    				return false;
+    			});
+    			$form.on('click', 'a.whLogist--product-remove', function() {
+    				var $cont = $(this).parent();
+    				var $coll = $form.find('a.whLogist--product-remove'),
+    					$last = $coll.last().parent(),
+    					removed = $coll.index(this);
+    				$(this).parent().slideUp('fast', function() {
+    					$last.hide();
+    					$(this).show();
+    					for(var i=0; i<$coll.length-1; i++) {
+	    					if(i<removed) continue;
+	    					$form.find('#product'+(i+1)).val($form.find('#product'+(i+2)).val());
+	    					$form.find('#goodCount'+(i+1)).val($form.find('#goodCount'+(i+2)).val());
+	    				}
+    					$last.remove();
+    				});
+    				if($coll.length==2)
+    					$form.find('a.whLogist--product-remove').remove();
+    				return false;
+    			});
+		    });
+		}
+	};
+}();

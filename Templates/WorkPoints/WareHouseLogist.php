@@ -36,7 +36,8 @@ if($view['step'] == 1){
     <?php }
 elseif($view['step'] == 2) {?>
 
-<form method="post" action="/WorkPoint/WareHouseLogist/WareHouseNumber:<?php echo $view['currentWorkPlace']['ID']; ?>">
+<script type="text/javascript">SS.whLogist.init();</script>
+<form method="post" class="wh-logist-form" action="/WorkPoint/WareHouseLogist/WareHouseNumber:<?php echo $view['currentWorkPlace']['ID']; ?>">
 
     <h2>Создать доставку:</h2>
     <div class="form-div">
@@ -71,28 +72,19 @@ elseif($view['step'] == 2) {?>
         </select>
     </div>
 
-    <label class="form-label" for="product1"> Продукт: </label>
-    <select name="product1" id="product1">
-        <?php foreach ($view['items']  as $item)
-        echo '<option value="'.$item['ID'].'">'.$item['name'].'</option>';
-        ?>
-    </select>
-
-    <div class="form-div">
+	<div class="form-div">
+		<label class="form-label" for="product1"> Продукт: </label>
+		<select class="whLogist-product" name="product1" id="product1">
+			<?php foreach ($view['items']  as $item)
+			echo '<option value="'.$item['ID'].'">'.$item['name'].'</option>';
+			?>
+		</select>
+		<br clear="all" />		
         <label class="form-label" for="goodCount1">Количество: </label>
-        <input class="form-input" type="number" min="1" name="goodCount1" id="goodCount1" autofocus/>
+        <input class="form-input whLogist-goodCount" type="number" min="1" name="goodCount1" id="goodCount1" autofocus/>
     </div>
-
-    <label class="form-label" for="product2"> Продукт: </label>
-    <select name="product2" id="product2">
-        <?php foreach ($view['items']  as $item)
-        echo '<option value="'.$item['ID'].'">'.$item['name'].'</option>';
-        ?>
-    </select>
-
-    <div class="form-div">
-        <label class="form-label" for="goodCount2">Количество: </label>
-        <input class="form-input" type="number" min="1" name="goodCount2" id="goodCount2" autofocus/>
+	<div class="form-div" style="padding: 0 0 10px 80px;">
+        <a href="#" class="new-position">добавить позицию</a>
     </div>
 
     <div class="form-div">
