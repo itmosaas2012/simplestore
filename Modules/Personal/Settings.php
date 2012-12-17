@@ -63,6 +63,7 @@ class Settings {
 	    if ($pass != "" && $pass2 != ""){
 	        if ($pass == $pass2){
 			    $this->db_request_update($name, $surname, $pass, $email, $tell);
+				$added++;
 		    }
 		    else{
 		        $this->view['message_error'] = 'Пароли не совпадают.';
