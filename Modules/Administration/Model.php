@@ -46,7 +46,7 @@ function addViewRolesAndAddress($mysql)
 
     $sql = 'SELECT workplaceID, address FROM workplace_'.$_SESSION['companyID'];
     foreach ($mysql->query($sql) as $row)
-            $view['workPlaces'][] = array('id' => $row['workplaceID'], 'address' => $row['address']);
+        $view['workPlaces'][] = array('id' => $row['workplaceID'], 'address' => $row['address']);
 
     $sql = 'SELECT rankID, name FROM rank';
     foreach ($mysql->query($sql) as $row)
@@ -80,10 +80,9 @@ function addUser($mysql)
             $email = !empty($_POST['email'])?'"'.$_POST['email'].'"':'"NULL"';
             $number = !empty($_POST['passeportNumber'])?'"'.$_POST['passeportNumber'].'"':'NULL';
             $series = !empty($_POST['passeportSerie'])?'"'.$_POST['passeportSerie'].'"':'NULL';
-            $workPlace = !empty($_POST['workPlace1'])?$_POST['workPlace1']:'NULL';
 
-            $sql = '  INSERT INTO user_'.$_SESSION['companyID'].' (login, password, email, name, surname, patronymic, tell, series, number, sex, workplaceID, activated)
-                            VALUES ('.$login.','.$password.','.$email.','.$name.','.$surname.','.$patronymic.','.$tell.','.$series.','.$number.','.$sex.','.$workPlace.', true)';
+            $sql = '  INSERT INTO user_'.$_SESSION['companyID'].' (login, password, email, name, surname, patronymic, tell, series, number, sex, activated)
+                            VALUES ('.$login.','.$password.','.$email.','.$name.','.$surname.','.$patronymic.','.$tell.','.$series.','.$number.','.$sex.', true)';
             $mysql->exec($sql);
 
             for($i=1;$i<=100;$i++)
@@ -91,10 +90,13 @@ function addUser($mysql)
                 if(empty($_POST['role'.$i])) break;
                 else
                 {
+                    $workPlaceID = !empty($_POST['workPlace'.$i])?$_POST['workPlace'.$i]:'NULL';
+                    $roleID = !empty($_POST['role'.$i])?$_POST['role'.$i]:'NULL';
+
                     $sql = 'SELECT userID FROM user_'.$_SESSION['companyID'].' WHERE login="'.$_POST['login'].'"';
                     foreach ($mysql->query($sql) as $row) $userID = $row['userID'];
 
-                    $sql = 'INSERT INTO userRank_'.$_SESSION['companyID'].' (rankID, userID) value ('.$_POST['role'.$i].','.$userID.')';
+                    $sql = 'INSERT INTO userRank_'.$_SESSION['companyID'].' (rankID, userID, workplaceID) value ('.$roleID.','.$userID.', '.$workPlaceID.')';
                     $mysql->exec($sql);
                 }
             }

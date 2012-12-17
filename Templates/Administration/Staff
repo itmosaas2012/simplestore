@@ -43,18 +43,20 @@
     </div>
 
     <div class="form-div">
-        <label class="form-label" for="workPlace"> Место работы: </label>
-        <input class="form-input" type="text" name="workPlace" id="workPlace" />
-    </div>
-ddd
-    <div class="form-div">
-        <label class="form-label" for="rank"> Должность: </label>
-        <input class="form-input" type="text" name="rank" id="rank" />
-        <select name="rank" id="rank">
-            <?php foreach ($view['roles'] as $role)
-                echo '<option value="'.$role.'">'.$role.'</option>';
+        <label class="form-label" for="workPlace1"> Место работы: </label>
+        <select name="workPlace1" id="workPlace1">
+            <?php foreach ($view['workPlaces'] as $workPlace)
+            echo '<option value="'.$workPlace['id'].'">'.$workPlace['address'].'</option>';
             ?>
-            <option value="1">1</option>
+        </select>
+    </div>
+
+    <div class="form-div">
+        <label class="form-label" for="role1"> Должность: </label>
+        <select name="role1" id="role1">
+            <?php foreach ($view['roles'] as $role)
+            echo '<option value="'.$role['id'].'">'.$role['name'].'</option>';
+            ?>
         </select>
     </div>
 
@@ -84,7 +86,7 @@ ddd
     </div>
     <div class="form-div">
         <label class="form-label" for="password"> Пароль: </label>
-        <input class="form-input" type="password" name="password" id="password" />
+        <input class="form-input" type="text" name="password" id="password" />
     </div>
 
     <div class="form-btn">
