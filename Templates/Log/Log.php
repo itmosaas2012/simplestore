@@ -2,7 +2,7 @@
 <?php if (count($view['events'])): ?>
     <ul>
     <?php foreach($view['events'] as $event): ?>
-        <li><?=$event->description?></li>
+        <li><i><?=$event->date?> (<?=$event->login?>): </i><?=$event->description?></li>
     <?php endforeach; ?>
     </ul>
 <?php else: ?>
