@@ -42,6 +42,7 @@ if($_SERVER['REQUEST_URI'] === '/' || $_SERVER['REQUEST_URI'] === '') ;
 elseif($_SERVER['REQUEST_URI'] === '/Registration') require_once 'Modules/Registration/Registration.php';
 elseif($_SERVER['REQUEST_URI'] === '/Logout') require_once 'Modules/Disconection/Disconection.php';
 elseif($_SERVER['REQUEST_URI'] === '/Settings') require_once 'Modules/Personal/AccountSettings.php';
+elseif($_SERVER['REQUEST_URI'] === '/SettingsTest') require_once 'Modules/Personal/Settings.php';
 elseif($_SERVER['REQUEST_URI'] === '/Purchase') require_once 'Modules/Purchase/Purchase.php';
 elseif($_SERVER['REQUEST_URI'] === '/Seller') require_once 'Modules/Seller/Seller.php';
 elseif($_SERVER['REQUEST_URI'] === '/Expert') require_once 'Modules/Expert/Expert.php';
