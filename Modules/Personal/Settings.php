@@ -24,6 +24,7 @@ class Settings {
 
         if (isset($_SESSION['companyID']) && $_SESSION['companyID']) {
             $this->db = new StoreDB($_SESSION['companyID']);
+			LogService::$STOREDB = $this->db;
         } else {
             $this->error_page('Произошла ошибка...');
             return;
@@ -38,6 +39,7 @@ class Settings {
                 $this->user_id = intval($user->userID);
             } else {
                 $this->error_page('Произошла ошибка...');
+				LogService::log_event('Произошла ошибка');
                 return;
             }
         }
@@ -75,6 +77,7 @@ class Settings {
 
         if ($added) {
             $this->view['message_success'] = 'Данные успешно обновлены.';
+			LogService::log_event('Данные успешно обновлены');
         } else {
             $this->view['message_error'] = 'Введите данные для обновления.';
         }

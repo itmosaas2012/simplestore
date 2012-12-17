@@ -27,6 +27,7 @@ class Seller {
 
         if (isset($_SESSION['companyID']) && $_SESSION['companyID']) {
             $this->db = new StoreDB($_SESSION['companyID']);
+			LogService::$STOREDB = $this->db;
         } else {
             $this->error_page('Произошла ошибка...');
             return;
@@ -39,9 +40,9 @@ class Seller {
             $user = $sth->fetchObject();
             if ($user) {
                 $this->user_id = intval($user->userID);
-                //$this->workplace_id = intval($user->workplaceID);
             } else {
                 $this->error_page('Произошла ошибка...');
+				LogService::log_event('Произошла ошибка');
                 return;
             }
         }
@@ -68,6 +69,7 @@ class Seller {
 
         if ($added) {
             $this->view['message_success'] = 'Данные успешно обновлены.';
+			LogService::log_event('Данные успешно обновлены.');
         } else {
             $this->view['message_error'] = 'Введите данные для обновления.';
         }
@@ -90,8 +92,6 @@ class Seller {
         (select sum(count) from %object% o where o.workplaceID in (select workplaceID from %workplace% wp where wp.wpTypeID = 1) and o.itemID = i.itemID) as ware_count
         from %item% i');
 
-        //$sth->bindValue(':workplaceID', $this->workplace_id, PDO::PARAM_INT);
-
         $sth->execute();
         while ($db_item = $sth->fetchObject()) {
             $db_item->ware_count = intval($db_item->ware_count);
@@ -105,7 +105,7 @@ class Seller {
         if ($_SESSION['rank'] == 'Продавец магазина') {
             return true;
         }
-
+		
         return false;
     }
 

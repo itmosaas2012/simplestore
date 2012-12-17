@@ -27,6 +27,7 @@ class Expert {
 
         if (isset($_SESSION['companyID']) && $_SESSION['companyID']) {
             $this->db = new StoreDB($_SESSION['companyID']);
+			LogService::$STOREDB = $this->db;
         } else {
             $this->error_page('Произошла ошибка...');
             return;
@@ -39,17 +40,13 @@ class Expert {
             $user = $sth->fetchObject();
             if ($user) {
                 $this->user_id = intval($user->userID);
-                //$this->workplace_id = intval($user->workplaceID);
             } else {
                 $this->error_page('Произошла ошибка...');
+				LogService::log_event('Произошла ошибка');
                 return;
             }
         }
-/*
-        if (array_key_exists('form', $_POST) && $_POST['form'] == 'request_items') {
-            $this->process_request();
-        }
-*/
+
         $this->view['items'] = $this->all_items();
 
         $this->view['Content'] = 'Templates/Expert/Expert.php';
