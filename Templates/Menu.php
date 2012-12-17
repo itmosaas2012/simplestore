@@ -31,6 +31,8 @@
                                         <li class="menuSeparator"></li>
                                         <li class="heder_subMenu_item"><a href="/Administration/WorkPlaces">Управления пунктами</a></li>
                                         <li class="menuSeparator"></li>
+                                        <li class="heder_subMenu_item"><a href="/Administration/Log">Логи</a></li>
+                                        <li class="menuSeparator"></li>
                                     </ul>
                                 </nav></li>
                             <li class="menuSeparator"></li>
