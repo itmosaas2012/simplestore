@@ -120,7 +120,7 @@ SS.newStaff = function() {
             ],
             phone: [
                 /^[+0-9() -]{5,}$/i,
-                'Телефон может содержать только цифры, скобки, знаки +, - и пробел (не менее 5 символов'
+                'Телефон может содержать только цифры, скобки, знаки +, - и пробел (не менее 5 символов)'
             ],
             email: [
             /* from: http://habrahabr.ru/post/55820/ */
@@ -332,6 +332,69 @@ SS.whLogist = function() {
     					$form.find('a.whLogist--product-remove').remove();
     				return false;
     			});
+		    });
+		}
+	};
+}();
+
+
+SS.settingsForm = function() {
+    var formConfig = {
+            familyName: [
+                /^[а-яa-z- ']*$/i,
+                'Некорректная фамилия.'
+            ], 
+            givenName: [
+                /^[а-яa-z- ']*$/i,
+                'Некорректное имя.'
+            ], 
+            phone: [
+                /^([+0-9() -]{5,})?$/i,
+                'Телефон может содержать только цифры, скобки, знаки +, - и пробел (не менее 5 символов)'
+            ],
+            email: [
+            /* from: http://habrahabr.ru/post/55820/ */
+                /^[-a-z0-9!#$%&'*+\/=?^_`{|}~]+(?:\.[-a-z0-9!#$%&'*+\/=?^_`{|}~]+)*@(?:[a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*(?:aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$/i,
+                'Некорректный e-mail'
+            ],
+            password: [
+                function(val) { return SS.passwordDiff(val).level > 0; },
+                'Ненадежный пароль.'
+            ],
+			password2: [
+                function(val) { return val == $('#password').val(); },
+                'Введенные пароли не совпадают.',
+				true
+            ]
+        };
+	var companyName = '';
+
+    return {
+	    init: function(cmpName) {
+			companyName = cmpName;
+		    $(function() {
+		    	var $form = $('form.settings-form');
+				$form.on('submit', SS.validateForm(formConfig));
+				$form.on('keyup', 'input', function() { SS.validateField.call(this, formConfig[this.name]); });
+				$form.on('keyup', '[name="password"]', function() {
+					var $o = $(this);
+					var res = SS.passwordDiff(this.value);
+					$o.siblings('.password-diff').find('.password-diff--progress').css('background', res.color).css('width', res.score+'%');
+					$o.siblings('.password-diff').find('.password-diff--comment').html(res.title);
+				});
+				$form.find('[name="password"]').keyup();
+				
+				var warned = false;
+				var $delForm = $('form.delete-company-form');
+				$delForm.on('keyup', '[name="del_companyName"]', function() { SS.validateField.call(this, [function(val) {return val==companyName}, 'Неверно'], true); });
+    			$delForm.on('submit', function() {
+					if(warned) {
+						return SS.validateField.call($delForm.find('[name="del_companyName"]')[0], [function(val) {return val==companyName}, 'Неверно'], true);
+					}
+					$delForm.find('.form-div:hidden').slideDown('fast');
+					warned = true;
+					return false;
+				});
 		    });
 		}
 	};

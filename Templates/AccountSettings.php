@@ -55,13 +55,14 @@ $(function() {
 });
 </script>
 
-<form method="POST" action="">
+<script type="text/javascript">SS.settingsForm.init('<?php echo htmlspecialchars($_SESSION['company'], ENT_QUOTES);?>');</script>
+<form method="POST" action="" class="settings-form">
 
     <h2>Настройки аккаунта:</h2>
 	
     <div class="form-div">
         <label class="form-label" for="familyName"> Логин: </label>
-        <input class="form-input" type="text" name="familyName" id="familyName" disabled="true" value="<?php echo $_SESSION['login']?>"/>
+        <input class="form-input" type="text" name="login" id="login" disabled="true" value="<?php echo $_SESSION['login']?>"/>
     </div>
 
     <div class="form-div">
@@ -88,6 +89,8 @@ $(function() {
     <div class="form-div">
         <label class="form-label" for="password"> Пароль: </label>
         <input class="form-input" type="password" name="password" id="password" value="<?php if (isset($_SESSION['userData']) && $_SESSION['userData']['password'] != 'NULL') echo $_SESSION['userData']['password']?>"/>
+		<br clear="all" />
+		<div class="password-diff"><div class="password-diff--progressBar"><div class="password-diff--progress"></div></div> <span class="password-diff--comment">ненадежный</span></div>
     </div>
 	
     <div class="form-div">
@@ -105,7 +108,12 @@ $(function() {
 <br>
 <h2>Вы можете удалить компанию:</h2>
 
-<form method="POST">
+<form method="POST" class="delete-company-form">
+	<div class="form-div" style="display: none; width: 400px; text-align: center; padding-left: 35px;">
+		<h3>Внимание!</h3>
+		Удаление компании отменить невозможно. Чтобы подтвердить свое намерение, введите в поле ниже название компании и нажмите кнопку еще раз.<br/>
+		<input type="text" name="del_companyName" style="margin-top: 20px; width: 100%;" />
+	</div>
     <div class="form-btn">
         <button type="submit" class="btn btn-primary btn-small" name="delete_company"> Удалить компанию </button>
 	</div>
