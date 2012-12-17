@@ -39,7 +39,7 @@ class Seller {
             $user = $sth->fetchObject();
             if ($user) {
                 $this->user_id = intval($user->userID);
-                $this->workplace_id = intval($user->workplaceID);
+                //$this->workplace_id = intval($user->workplaceID);
             } else {
                 $this->error_page('Произошла ошибка...');
                 return;
@@ -90,7 +90,7 @@ class Seller {
         (select sum(count) from %object% o where o.workplaceID in (select workplaceID from %workplace% wp where wp.wpTypeID = 1) and o.itemID = i.itemID) as ware_count
         from %item% i');
 
-        $sth->bindValue(':workplaceID', $this->workplace_id, PDO::PARAM_INT);
+        //$sth->bindValue(':workplaceID', $this->workplace_id, PDO::PARAM_INT);
 
         $sth->execute();
         while ($db_item = $sth->fetchObject()) {

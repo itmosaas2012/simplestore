@@ -1,0 +1,1 @@
+<div class="message error"><?=$view['error']?></div>

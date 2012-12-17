@@ -4,24 +4,21 @@ require_once __DIR__.'/../StoreDB/StoreDB.php';
 
 StoreDB::$MYSQL = $mysql;
 
-$expert = new Expert();
-$expert->init();
-$view = $expert->view;
+$settings = new Settings();
+$settings->init();
+$view = $settings->view;
 
-class Expert {
+class Settings {
 
     public $view;
 
     /* @var StoreDB */
     private $db;
-
     private $user_id;
-
-    private $workplace_id;
 
     public function init() {
         if (!$this->check_permissions()) {
-            $this->error_page('Чтобы иметь доступ к этой странице вы должны иметь роль товароведа розничного магазина!');
+            $this->error_page('Вы хотите просто так получить доступ к этой странице? Наивные... Залогиньтесь, пожалуйста!');
             return;
         }
 
@@ -39,20 +36,19 @@ class Expert {
             $user = $sth->fetchObject();
             if ($user) {
                 $this->user_id = intval($user->userID);
-                //$this->workplace_id = intval($user->workplaceID);
             } else {
                 $this->error_page('Произошла ошибка...');
                 return;
             }
         }
-/*
+
         if (array_key_exists('form', $_POST) && $_POST['form'] == 'request_items') {
             $this->process_request();
         }
-*/
+
         $this->view['items'] = $this->all_items();
 
-        $this->view['Content'] = 'Templates/Expert/Expert.php';
+        $this->view['Content'] = 'Templates/Personal/Settings.php';
     }
 
     private function process_request() {
@@ -61,54 +57,48 @@ class Expert {
             $item_id = intval($item_id);
             $item_count = intval($item_count);
             if ($item_count > 0) {
-                //$this->db_request_add($item_id, $item_count);
+                $this->db_request_add($item_id, $item_count);
                 $added++;
             }
         }
 
         if ($added) {
-            $this->view['message_success'] = 'Заказ добавлен.';
+            $this->view['message_success'] = 'Данные успешно обновлены.';
         } else {
-            $this->view['message_error'] = 'Закажите хотя бы один товар.';
+            $this->view['message_error'] = 'Введите данные для обновления.';
         }
     }
-/*
+
     private function db_request_add($item_id, $item_count) {
-        $sth = $this->db->prepare('insert into %request% set
-                                userID = :userID,
+        $sth = $this->db->prepare('insert into %soldItem% set
                                 itemID = :itemID,
                                 count = :count');
 
-        $sth->bindValue(':userID', $this->user_id, PDO::PARAM_INT);
         $sth->bindValue(':itemID', $item_id, PDO::PARAM_INT);
         $sth->bindValue(':count', $item_count, PDO::PARAM_INT);
 
         return $sth->execute();
     }
-*/
+
     public function all_items() {
         $items = array();
-        $sth = $this->db->prepare('select i.*,
-        (select sum(count) from %object% o where o.workplaceID in (select workplaceID from %workplace% wp where wp.wpTypeID = 1) and o.itemID = i.itemID) as ware_count,
-        (select sum(count) from %soldItem% si where si.itemID = i.itemID) as sold_count
-        from %item% i');
-
-        //$sth->bindValue(':workplaceID', $this->workplace_id, PDO::PARAM_INT);
+        $sth = $this->db->prepare('SELECT name, surname, password, email, tell FROM user_' . $_SESSION['companyID'] . 'WHERE login="'. $_SESSION['login'] .'"');
 
         $sth->execute();
         while ($db_item = $sth->fetchObject()) {
-            $db_item->ware_count = intval($db_item->ware_count);
-            $db_item->sold_count = intval($db_item->sold_count);
-            $db_item->result = intval($db_item->ware_count) + intval($db_item->sold_count) - intval($db_item->sold_count);
+            $db_item->name = $db_item->name;
+			$db_item->surname = $db_item->surname;
+			$db_item->password = $db_item->password;
+			$db_item->email = $db_item->email;
+			$db_item->tell = $db_item->tell;
             $items[] = $db_item;
         }
-		
         return $items;
     }
 
     private function check_permissions() {
         
-        if ($_SESSION['rank'] == 'Товароввед магазина') {
+        if ($_SESSION['connected']) {
             return true;
         }
 
@@ -117,6 +107,6 @@ class Expert {
 
     private function error_page($text) {
         $this->view['error'] = $text;
-        $this->view['Content'] = 'Templates/Expert/ErrorPage.php';
+        $this->view['Content'] = 'Templates/Seller/ErrorPage.php';
     }
 }
