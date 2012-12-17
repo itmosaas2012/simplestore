@@ -39,7 +39,7 @@ class Expert {
             $user = $sth->fetchObject();
             if ($user) {
                 $this->user_id = intval($user->userID);
-                $this->workplace_id = intval($user->workplaceID);
+                //$this->workplace_id = intval($user->workplaceID);
             } else {
                 $this->error_page('Произошла ошибка...');
                 return;
@@ -93,7 +93,7 @@ class Expert {
         (select sum(count) from %soldItem% si where si.itemID = i.itemID) as sold_count
         from %item% i');
 
-        $sth->bindValue(':workplaceID', $this->workplace_id, PDO::PARAM_INT);
+        //$sth->bindValue(':workplaceID', $this->workplace_id, PDO::PARAM_INT);
 
         $sth->execute();
         while ($db_item = $sth->fetchObject()) {
